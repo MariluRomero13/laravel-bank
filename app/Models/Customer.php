@@ -27,4 +27,9 @@ class Customer extends Model
             'status'
         ]);
     }
+
+    public function credit()
+    {
+        return $this->belongsToMany('App\Models\Credit');
+    }
 }

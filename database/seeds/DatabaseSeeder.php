@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CreditsBureauTableSeeder::class,
             MessagesTableSeeder::class,
             CreditsTableSeeder::class,
+            CreditsCustomersTableSeeder::class,
             CardsTableSeeder::class,
             CardsCustomersTableSeeder::class
         ]);

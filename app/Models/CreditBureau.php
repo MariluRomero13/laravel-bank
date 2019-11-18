@@ -15,9 +15,4 @@ class CreditBureau extends Model
     {
         return $this->hasMany('App\Models\Message');
     }
-
-    public function credit()
-    {
-        return $this->hasMany('App\Models\Credit');
-    }
 }

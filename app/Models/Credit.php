@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Credit extends Model
 {
-    public function creditBureau()
+    public function customer()
     {
-        return $this->belongsTo('App\Models\CreditBureau');
+        return $this->belongsToMany('App\Models\Customer');
     }
 }
