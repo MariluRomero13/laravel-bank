@@ -9,16 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
+    protected $primaryKey = 'id';
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -39,7 +30,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne('App\Models\Role');
+        return $this->hasMany('App\Models\Role');
     }
 
     public function customer()

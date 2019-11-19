@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ViewController@index')->name('welcome');
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('users', 'UserController');
+Route::resource('customers', 'CustomerController');
+Route::resource('address', 'AddressController');
+Route::resource('loans', 'LoanController');
+Route::resource('payments', 'PaymentController');
+Route::resource('credits-bureaus', 'CreditBureauController');
+Route::resource('messages', 'MessageController');
+Route::resource('credits', 'CreditController');
+Route::resource('cards', 'CardController');
