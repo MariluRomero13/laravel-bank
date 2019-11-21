@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
     use Notifiable;
     protected $primaryKey = 'id';
+    protected $fillable = [
+        'role_id', 'name', 'email', 'password', 'status'
+    ];
     /**
      * The attributes that should be hidden for arrays.
      *
