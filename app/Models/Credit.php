@@ -8,6 +8,16 @@ class Credit extends Model
 {
     public function customer()
     {
-        return $this->belongsToMany('App\Models\Customer');
+        return $this->belongsTo('App\Models\Customer');
+    }
+
+    public function place()
+    {
+        return $this->belongsTo('App\Models\Place');
+    }
+
+    public function loan()
+    {
+        return $this->belongsTo('App\Models\Loan');
     }
 }

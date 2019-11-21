@@ -30,6 +30,11 @@ class Customer extends Model
 
     public function credit()
     {
-        return $this->belongsToMany('App\Models\Credit');
+        return $this->hasMany('App\Models\Credit');
+    }
+
+    public function loan()
+    {
+        return $this->belongsTo('App\Models\Loan');
     }
 }

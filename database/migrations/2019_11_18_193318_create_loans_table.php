@@ -16,6 +16,7 @@ class CreateLoansTable extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
+            $table->integer('credit_id')->unsigned();
             $table->integer('years_to_pay');
             $table->integer('payment_type');
             $table->integer('interest_rate');
@@ -25,6 +26,7 @@ class CreateLoansTable extends Migration
             $table->boolean('status')->default(0);
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('credit_id')->references('id')->on('credits');
         });
     }
 

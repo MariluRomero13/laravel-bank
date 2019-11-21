@@ -15,11 +15,14 @@ class CreateCreditsTable extends Migration
     {
         Schema::create('credits', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('institution_name', 100);
+            $table->integer('place_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
             $table->integer('credit_type');
             $table->text('description');
             $table->boolean('status')->default(1);
-            $table->integer('behavior');
+            $table->integer('behavior')->default(1);
+            $table->foreign('place_id')->references('id')->on('places');
+            $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();
         });
     }

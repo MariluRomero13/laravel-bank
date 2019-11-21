@@ -13,6 +13,7 @@ class LoansTableSeeder extends Seeder
     {
         DB::table('loans')->insert([
             'customer_id' => 1,
+            'credit_id' => 1,
             'years_to_pay' => 3,
             'payment_type' => 2,
             'interest_rate' => 15,

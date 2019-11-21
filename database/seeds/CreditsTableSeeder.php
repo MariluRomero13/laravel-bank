@@ -12,25 +12,27 @@ class CreditsTableSeeder extends Seeder
     public function run()
     {
         DB::table('credits')->insert([
-            'institution_name' => 'Walmart',
+            'place_id' => 1,
+            'customer_id' => 1,
             'credit_type' => 1,
             'description' => 'Nor again is there anyone who loves or pursues or desires to obtain
                                 pain of itself, because it is pain,
                                 but occasionally circumstances occur in which
                                 toil and pain can procure him some great pleasure',
             'status' => 1,
-            'behavior' => 3
+            'behavior' => 1
         ]);
 
         DB::table('credits')->insert([
-            'institution_name' => 'Coppel',
+            'place_id' => 2,
+            'customer_id' => 1,
             'credit_type' => 1,
             'description' => 'Nor again is there anyone who loves or pursues or desires to obtain
                                 pain of itself, because it is pain,
                                 but occasionally circumstances occur in which
                                 toil and pain can procure him some great pleasure',
             'status' => 1,
-            'behavior' => 2
+            'behavior' => 1
         ]);
     }
 }

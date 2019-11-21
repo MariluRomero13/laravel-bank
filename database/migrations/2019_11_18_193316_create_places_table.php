@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCreditCustomerTable extends Migration
+class CreatePlacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateCreditCustomerTable extends Migration
      */
     public function up()
     {
-        Schema::create('credit_customer', function (Blueprint $table) {
+        Schema::create('places', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('credit_id')->unsigned();
-            $table->integer('customer_id')->unsigned();
-            $table->foreign('credit_id')->references('id')->on('credits');
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->string('name', 50);
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateCreditCustomerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credit_customer');
+        Schema::dropIfExists('places');
     }
 }

@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             CustomersTableSeeder::class,
             AddressTableSeeder::class,
+            PlacesTableSeeder::class,
+            CreditsTableSeeder::class,
             LoansTableSeeder::class,
             PaymentsTableSeeder::class,
             CreditsBureauTableSeeder::class,
             MessagesTableSeeder::class,
-            CreditsTableSeeder::class,
-            CreditsCustomersTableSeeder::class,
             CardsTableSeeder::class,
             CardsCustomersTableSeeder::class
         ]);

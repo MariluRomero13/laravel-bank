@@ -10,4 +10,14 @@ class Loan extends Model
     {
         return $this->hasMany('App\Models\Payment');
     }
+
+    public function customer()
+    {
+        return $this->hasMany('App\Models\Customer');
+    }
+
+    public function credit()
+    {
+        return $this->hasMany('App\Models\Credit');
+    }
 }
