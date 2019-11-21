@@ -75,14 +75,43 @@
                     </div>
                 </div>
                 <div class="sidebar-menu">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-tachometer-alt"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                    </ul>
+                    @if(Auth::user()->role_id == 1)
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tachometer-alt"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-users"></i>
+                                    <span>Usuarios</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>Clientes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-university"></i>
+                                    <span>Instituciones</span>
+                                </a>
+                            </li>
+                        </ul>
+                    @else
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-tachometer-alt"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                        </ul>
+                    @endif
                 </div>
             </div>
         </nav>
