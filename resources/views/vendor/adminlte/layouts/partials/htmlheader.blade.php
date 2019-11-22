@@ -2,7 +2,6 @@
     <meta charset="UTF-8">
     <title> HSTW Bank - @yield('title', 'Your title here') </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="http://127.0.0.1:8000/css/all.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
