@@ -13,6 +13,7 @@
 
 Route::get('/', 'ViewController@welcome');
 Route::resource('/usuarios', 'UserController');
+Route::resource('/clientes', 'CustomerController');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware
