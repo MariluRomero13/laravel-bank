@@ -5,7 +5,7 @@
 @endsection
 
 @section('links')
-    <link rel="stylesheet" href=" http://127.0.0.1:8000/css/all.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -20,8 +20,8 @@
               <h3 class="box-title">Clientes</h3>
             </div>
             <div class="box-body">
-                <a href="{{ route('clientes.create')}}" type="button" class="btn btn-info">
-                    Agregar
+                <a href="{{ route('clientes.create')}}" type="button" class="btn btn-primary button-style">
+                        <i class="fa fa-user-plus"></i> Agregar
                 </a>
                 <div class="table-responsive" style="margin-top: 2%;">
                     <table id="customersTable" class="table table-bordered table-hover">
@@ -31,6 +31,7 @@
                                 <th>CURP</th>
                                 <th>RFC</th>
                                 <th>Acciones</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,10 +41,20 @@
                                     <td>{{ $customer->curp }}</td>
                                     <td>{{ $customer->rfc }}</td>
                                     <td>
-                                        <button class="btn btn-warning">Agregar dirección</button>
-                                        <button class="btn btn-warning">Ver detalles</button>
-                                        <button class="btn btn-warning">Editar</button>
-                                        <button class="btn btn-warning">Eliminar</button>
+                                        <a class="btn btn-warning" type="button">
+                                            <i class="fa fa-map-marker"></i>
+                                        </a>
+                                        <a class="btn btn-warning" type="button">
+                                            <i class="fa fa-list"></i>
+                                        </a>
+                                        <a class="btn btn-warning" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success">
+                                            <i class="fa fa-check"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
