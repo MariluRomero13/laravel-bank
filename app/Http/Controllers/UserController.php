@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use DataTables;
+use App\Http\Requests\StoreUsers;
+use App\Http\Requests\UpdateUsers;
+use Illuminate\Support\Facades\Crypt;
+use Datatables;
 
 class UserController extends Controller
 {
@@ -15,7 +18,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::with('role')->get();
+        //return Datatables::eloquent($users);
         return view('users.index', compact('users'));
     }
 
@@ -26,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -35,9 +39,15 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUsers $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
+        $user->role_id = 1;
+        $user->save();
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -59,7 +69,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.edit', compact('user', 'id'));
     }
 
     /**
@@ -69,9 +80,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUsers $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        if ($request->get('password') != null) {
+            $user->password = bcrypt($request->get('password'));
+        }
+        $user->save();
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -82,6 +99,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->status = !$user->status;
+        $user->save();
+        return response()->json([
+            'success' => 'User deleted',
+            'status' => $user->status
+        ]);
     }
 }
