@@ -11,14 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/usuarios', function () {
-    return view('users.index');
-});
-
+Route::get('/', 'ViewController@welcome');
+Route::resource('/usuarios', 'UserController');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware

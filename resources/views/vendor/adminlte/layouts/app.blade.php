@@ -4,6 +4,7 @@
     @section('htmlheader')
         @include('adminlte::layouts.partials.htmlheader')
     @show
+    @yield('links')
 
     <body class="skin-blue sidebar-mini">
         <div id="app" v-cloak>
@@ -19,7 +20,7 @@
                 @include('adminlte::layouts.partials.contentheader')
 
                 <!-- Main content -->
-                <section class="content">
+                <section class="content color-text">
                     <!-- Your Page Content Here -->
                     @yield('main-content')
                 </section><!-- /.content -->
@@ -34,6 +35,8 @@
         @section('scripts')
             @include('adminlte::layouts.partials.scripts')
         @show
+
+        @yield('script')
 
     </body>
 </html>
