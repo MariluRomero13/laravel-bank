@@ -18,11 +18,9 @@
 
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
-                    <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
+                    <strong>Whoops!</strong> Algo salió mal<br><br>
                     <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                       <li>Usuario y/o contraseña son incorrectos</li>
                     </ul>
                 </div>
             @endif
@@ -43,9 +41,6 @@
                         <div class="col-xs-12">
                             <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
                         </div><!-- /.col -->
-                    </div>
-                    <div class="password-space">
-                        <a href="{{ url('/password/reset') }}">¿Olvidaste tu contraseña?</a>
                     </div>
                 </form>
             </div>

@@ -18,19 +18,35 @@
             </div>
         @endif
         <!-- Sidebar Menu -->
-        <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MENU</li>
-            <li><a href="{{ url('home') }}"><i class='fa fa-dashboard'></i><span>Dashboard</span></a></li>
-            <li><a href="{{ url('usuarios') }}"><i class='fa fa-users'></i><span>Usuarios</span></a></li>
-            <li><a href="{{ url('clientes') }}"><i class='fa fa-user-secret'></i><span>Clientes</span></a></li>
-            <li><a href="#"><i class='fa fa-university'></i><span>Instituciones</span></a></li>
-            <li class="treeview">
-                <a href="#"><i class='fa fa-file'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class='fa fa-circle-o'></i><span>Prestamos</span></a></li>
-                </ul>
-            </li>
-        </ul><!-- /.sidebar-menu -->
+        @if(! Auth::guest())
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">MENU</li>
+                @if(Auth::user()->role_id == 1)
+                    <li><a href="{{ url('home') }}"><i class='fa fa-dashboard'></i><span>Dashboard</span></a></li>
+                    <li><a href="{{ url('usuarios') }}"><i class='fa fa-users'></i><span>Usuarios</span></a></li>
+                    <li><a href="{{ url('clientes') }}"><i class='fa fa-user-secret'></i><span>Clientes</span></a></li>
+                    <li><a href="#"><i class='fa fa-university'></i><span>Instituciones</span></a></li>
+                    <li><a href="#"><i class='fa fa-credit-card'></i><span>Tarjetas</span></a></li>
+                    <li><a href="#"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
+                    <li><a href="#"><i class='fa fa-balance-scale'></i><span>Préstamos</span></a></li>
+                    <li><a href="#"><i class='fa fa-money'></i><span>PAgos</span></a></li>
+                    <li class="treeview">
+                        <a href="#"><i class='fa fa-file'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class='fa fa-circle-o'></i><span>Calcular préstamos</span></a></li>
+                            <li><a href="#"><i class='fa fa-circle-o'></i><span>Préstamos clientes</span></a></li>
+                            <li><a href="#"><i class='fa fa-circle-o'></i><span>Buro de crédito</span></a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li><a href="#"><i class='fa fa-dashboard'></i><span>Dashboard</span></a></li>
+                    <li><a href="#"><i class='fa fa-credit-card'></i><span>Tarjetas</span></a></li>
+                    <li><a href="#"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
+                    <li><a href="#"><i class='fa fa-balance-scale'></i><span>Préstamos</span></a></li>
+                    <li><a href="#"><i class='fa fa-money'></i><span>Buro de crédito</span></a></li>
+                @endif
+            </ul><!-- /.sidebar-menu -->
+        @endif
     </section>
     <!-- /.sidebar -->
 </aside>
