@@ -49,9 +49,9 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#home" class="smoothScroll">{{ trans('adminlte_lang::message.home') }}</a></li>
-                    <li><a href="#desc" class="smoothScroll">{{ trans('adminlte_lang::message.description') }}</a></li>
-                    <li><a href="#contact" class="smoothScroll">{{ trans('adminlte_lang::message.contact') }}</a></li>
+                    <li class="active"><a href="#home" class="smoothScroll">Inicio</a></li>
+                    <li><a href="#desc" class="smoothScroll">Nosotros</a></li>
+                    <li><a href="#contact" class="smoothScroll">Contácto</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::guest())
@@ -75,7 +75,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                     <br>
                     <div class="container fluid">
                         <div class="row">
-                            <div class="col col-sm-12">
+                            <div class="col col-md-12">
                                 <div class="container">
                                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                         <!-- Indicators -->
@@ -88,27 +88,26 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner">
                                             <div class="item active">
-                                                <img class="center-block" src="/img/app-bg.png" alt="Los Angeles">
+                                                <img class="center-block" src="/img/landimg1.jpg" alt="Los Angeles">
+                                                <div class="carousel-caption">
+                                                    <h1 class="imgc">Solicita tu tarjeta y aprovecha todas las promociones.</h1>
+                                                </div>
                                             </div>
 
                                             <div class="item">
-                                                <img class="center-block" src="{{ asset('/img/app-bg.png') }}" alt="Chicago">
+                                                <img class="center-block" src="{{ asset('/img/landimg2.jpg') }}" alt="Chicago">
+                                                <div class="carousel-caption">
+                                                    <h1 class="imgc">Asegura el futuro de tu familia.</h1>
+                                                </div>
                                             </div>
 
                                             <div class="item">
-                                                <img class="center-block" src="{{ asset('/img/app-bg.png') }}" alt="New York">
+                                                <img class="center-block" src="{{ asset('/img/landimg3.jpg') }}" alt="New York">
+                                                <div class="carousel-caption">
+                                                    <h1 class="imgc">Consigue ese préstamo que tanto quieres.</h1>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <!-- Left and right controls -->
-                                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -118,20 +117,20 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                             <div class="container lmp">
                                 <div class="col-md-4 col-sm-4">
                                     <div class="panel panel-default">
-                                        <div class="panel-body">Lorem</div>
-                                        <div class="well">...</div>
+                                        <div class="panel-body"><strong>Cómo preparar las finanzas de las fiestas decembrinas.</strong></div>
+                                        <div class="well"> En esta temporada muchos mexicanos reciben el aguinaldo y otras compensaciones, por lo que mantener el control sobre las compras y gastos se convierte en todo un reto. Aquí se proponen una serie de medidas para llevar a cabo una óptima administración del dinero de cara a la temporada navideña. </div>
                                     </div>
                                 </div> 
                                 <div class="col-md-4 col-sm-4">
                                     <div class="panel panel-default">
-                                        <div class="panel-body">Lorem</div>
-                                        <div class="well">...</div>
+                                        <div class="panel-body"><strong> HSTW México sigue fortaleciendo el uso de ia para mejorar la experiencia del cliente </strong></div>
+                                        <div class="well"> Uno de los ejes estratégicos de HSTW en México es poner al cliente en el centro del negocio, mejorando su experiencia y desarrollando servicios que favorezcan un manejo ágil, fácil y seguro de sus finanzas. A través del uso de la Inteligencia Artificial (IA) y mecanismos... <a>Leer más</a></div>
                                     </div>  
                                 </div> 
                                 <div class="col-md-4 col-sm-4">
                                     <div class="panel panel-default">
-                                        <div class="panel-body">Lorem</div>
-                                        <div class="well">...</div>
+                                        <div class="panel-body"><strong> ¿Cómo comenzar a usar codi en la app HSTW México?</strong> </div>
+                                        <div class="well"> El pasado 30 de septiembre inició operaciones el programa de Cobro Digital (CoDi), implementado por el Banco de México (Banxico). Se trata de un sistema para realizar pagos, cobros y transferencias por medio de códigos QR y la tecnología NFC. En esta plataforma se pueden... <a>Leer más</a> </div>
                                     </div>
                                 </div> 
                             </div>
@@ -153,17 +152,17 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                     <div class="col-lg-4">
                         <img src="{{ asset('/img/msecu.png') }}" alt="" style="width:12rem">
                         <h3>Séguridad</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <p>Porqué nos importas, ofrecemos seguros de hasta el 100%.</p>
                     </div>
                     <div class="col-lg-4">
                         <img src="{{ asset('/img/check.png') }}" alt="" style="width:12rem">
                         <h3>Crédito</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <p>Nosotros te damos tu credito fácilmente y con la tasa de interés mas baja.</p>
                     </div>
                     <div class="col-lg-4">
                         <img src="{{ asset('/img/ter.png') }}" alt="" style="width:12rem">
                         <h3>Fácilidad</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <p>Dispón de efectivo en cualquiera de nuestros cajeros automáticos y paga facilmente en cualquier establecimiento.</p>
                     </div>
                 </div>
                 <br>
@@ -172,8 +171,8 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
             <br>
             <div class="container">
                 <div class="jumbotron">
-                    <h1>Aqui va info</h1> 
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, iste illum, esse, aliquid laborum iure dolores eos officia nihil impedit commodi iusto optio earum. Ullam voluptate animi ex? Dolore, nisi?</p> 
+                    <h1 class="jmt">Preservar tu confianza es lo más importante para nosotros.</h1> 
+                    <p class="jmtp">HSTW impulsa el comportamiento íntegro mediante nuestro Código de Conducta, que es parte de nuestra cultura corporativa.</p> 
                 </div>
             </div>
                 <br>
@@ -189,24 +188,27 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
             <br>
             <div class="container cam">
                 <div class="col-md-4">
-                    <img src="{{ asset('/img/circle.png') }}" alt="Cinque Terre" style="width:10rem">  
+                    <img src="{{ asset('/img/place.png') }}" alt="Cinque Terre" style="width:10rem">  
                     <br>
                     <br>
-                    <p>Lorem</p>
+                    <p class="small">Sucursales y cajeros.</p>
+                    <p class="small acf"link="">Siempre cerca de ti</p>
                 </div>
 
                 <div class="col-md-4">
-                    <img src="{{ asset('/img/circle.png') }}" alt="Cinque Terre" style="width:10rem">  
+                    <img src="{{ asset('/img/cont.png') }}" alt="Cinque Terre" style="width:10rem">  
                     <br>
                     <br>
-                    <p>Lorem</p>
+                    <p class="small">Buzón de sugerencias.</p>
+                    <p class="small acf"link="">Contacta con nosotros</p>
                 </div>
 
                 <div class="col-md-4">
-                    <img src="{{ asset('/img/circle.png') }}" alt="Cinque Terre" style="width:10rem">  
+                    <img src="{{ asset('/img/serv.png') }}" alt="Cinque Terre" style="width:10rem">  
                     <br>
                     <br>
-                    <p>Lorem</p>
+                    <p class="small">Servicio al cliente.</p>
+                    <p class="small acf"link="">24 horas</p>
                 </div>
             </div>
         </div>
