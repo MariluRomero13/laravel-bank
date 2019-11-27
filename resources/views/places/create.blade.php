@@ -30,7 +30,7 @@
                             @endif
                             {{ csrf_field() }}
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
                                 <input type="text" class="form-control" placeholder="Nombre de la institución" id="name" name="name"  autofocus value="{{ old('name') }}">
                             </div><br>
                         </div>
@@ -39,7 +39,7 @@
                                 <i class="fa fa-save"></i> Guardar
                             </button>
                             <a type="button" class="btn btn-default pull-left" href="{{ route('instituciones.index') }}">
-                                <i class="fa fa-close"></i> Volver
+                                <i class="fa fa-arrow-left"></i> Volver
                             </a>
                         </div>
                     </form>

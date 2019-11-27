@@ -14,10 +14,22 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $places=Place::all();
-        return view('places.index',compact('places'));
+        if ($request->ajax()) {
+
+            return datatables()
+                ->eloquent(Place::query())
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="/institucion-editar/' . $row->id . '" data-id="' . $row->id . '" class="btn btn-warning">' .
+                        "<i class='fa fa-edit'></i>"
+                        . '</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->toJson();
+        }
+        return view('places.index');
     }
 
     /**
@@ -38,11 +50,10 @@ class PlaceController extends Controller
      */
     public function store(StorePlaces $request)
     {
-        $i=new Place();
-        $i->name=$request->name;
+        $i = new Place();
+        $i->name = $request->name;
         $i->save();
         return redirect()->route('instituciones.index');
-    
     }
 
     /**
@@ -78,7 +89,7 @@ class PlaceController extends Controller
     public function update(Request $request, $id)
     {
         $i = Place::find($id);
-        $i->name=$request->name;
+        $i->name = $request->name;
         $i->save();
         return redirect()->route('instituciones.index');
     }
@@ -90,12 +101,5 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $i=Place::find($id);
-        $i->delete();
-        return response()->json([
-            'success'=>'Place deleted',
-        ]);
-
-    }
+    { }
 }
