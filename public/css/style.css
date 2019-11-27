@@ -15,3 +15,27 @@
     color: white !important;
     border-color: #0070d6 !important;
 }
+
+.swal-button--confirm{
+    background-color: #5cb85c !important;
+    border-color: #5cb85c !important;
+    color: white !important;
+}
+.swal-button--confirm:hover{
+    background-color: #4cae4c !important;
+    border-color: #4cae4c !important;
+}
+
+.swal-button--danger{
+    color: white !important;
+}
+
+.pagination > .active > a {
+    background-color: #0070d6 !important;
+    border-color: #0070d6 !important;
+    color: white !important;
+}
+
+.ocultar {
+    display: none;
+}

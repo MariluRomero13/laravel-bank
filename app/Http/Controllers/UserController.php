@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUsers;
 use App\Http\Requests\UpdateUsers;
-use Illuminate\Support\Facades\Crypt;
-use Datatables;
+use DB;
 
 class UserController extends Controller
 {
@@ -18,9 +17,37 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::with('role')->get();
-        //return Datatables::eloquent($users);
-        return view('users.index', compact('users'));
+        if ($request->ajax()) {
+            $users = DB::table('users as u')
+                ->join('roles as r', 'r.id', '=', 'u.role_id')
+                ->orderBy('r.name', 'asc')
+                ->select('u.id as user_id', 'u.name as username', 'u.email', 'r.name as rol', 'u.status');
+
+            return datatables()
+                ->query($users)
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="/usuarios-editar/' . $row->user_id . '" data-id="' . $row->user_id . '" class="btn btn-warning">' .
+                        "<i class='fa fa-edit'></i>"
+                        . '</a>';
+                    return $btn;
+                })
+                ->addColumn('status', function ($row) {
+                    if ($row->status) {
+                        $btn = '<a data-id="' . $row->user_id . '" class="btn btn-success delete" data-target="' . $row->status . '">' .
+                            "<i class='fa fa-check'></i>"
+                            . '</a>';
+                    } else {
+                        $btn = '<a data-id="' . $row->user_id . '" class="btn btn-danger delete">' .
+                            "<i class='fa fa-close'></i>"
+                            . '</a>';
+                    }
+
+                    return $btn;
+                })
+                ->rawColumns(['action', 'status'])
+                ->toJson();
+        }
+        return view('users.index');
     }
 
     /**
@@ -70,7 +97,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('users.edit', compact('user', 'id'));
+        return view('users.edit', compact('user'));
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.app')
 
 @section('title')
-	Usuarios
+	Créditos
 @endsection
 
 @section('links')
@@ -17,20 +17,22 @@
     <div class="col-xs-12">
         <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Usuarios</h3>
+            <h3 class="box-title">Créditos</h3>
         </div>
         <div class="box-body">
             @csrf
-            <a class="btn btn-default button-style" href="{{ route('usuarios.create') }}">
-                <i class="fa fa-user-plus"></i> Agregar
+            <a class="btn btn-default button-style" href="{{ route('creditos.create') }}">
+                <i class="fa fa-plus"></i> Agregar
             </a>
-            <table id="usersTable" class="table table-bordered table-hover">
+            <table id="creditsTable" class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Rol</th>
+                        <th>Cliente</th>
+                        <th>Institución</th>
+                        <th>Crédito</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
+                        <th>Comportamiento</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
@@ -47,16 +49,18 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
     <script>
-        var usersTable = $('#usersTable').DataTable({
+        var creditsTable = $('#creditsTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('usuarios.index') }}",
+            ajax: "{{ route('creditos.index') }}",
             columns: [
-                {data: 'username', name: 'u.name'},
-                {data: 'email', name: 'u.email'},
-                {data: 'rol', name: 'r.name'},
+                {data: 'customer', name: 'cu.name'},
+                {data: 'place', name: 'p.name'},
+                {data: 'credit_type', name: 'c.credit_type'},
+                {data: 'description', name: 'c.description'},
                 {data: 'action'},
-                {data: 'status', name: 'u.status'}
+                {data: 'behavior', name: 'c.behavior'},
+                {data: 'status', name: 'c.status'}
             ],
             language: {
                 "info": "_TOTAL_ registros",
@@ -81,12 +85,12 @@
     </script>
     <script>
         $('body').on('click', '.delete', function (){
-            var user_id = $(this).data("id");
+            var credit_id = $(this).data("id");
             var value = $(this).data("target");
             var token = $("meta[name='csrf-token']").attr("content");
             swal({
                 title: "¿Estás seguro?",
-                text: value? 'El usuario se desactivará': 'El usuario se activará',
+                text: value? 'El crédito se desactivará': 'El crédito se activará',
                 icon: "warning",
                 buttons: {
                     cancel: {
@@ -109,24 +113,73 @@
                 if (willDelete) {
                     $.ajax(
                     {
-                        url:"/users-destroy/"+user_id,
+                        url:"/creditos-destroy/"+credit_id,
                         type: "GET",
                         data: {
-                            "id": user_id,
+                            "id": credit_id,
                             "_token": token,
                         },
                         success: function (response){
                             var content = "";
                             if(response.status) {
-                                content ="El usuario se activó correctamente";
+                                content ="El crédito se activó correctamente";
                             }
                             else {
-                                content ="El usuario se desactivó correctamente";
+                                content ="El crédito se desactivó correctamente";
                             }
                             swal(content, {
                                 icon: "success",
                             });
-                            usersTable.draw();
+                            creditsTable.draw();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        $('body').on('click', '.behavior', function (){
+            var credit_id = $(this).data("id");
+            var value = $(this).data("target");
+            var token = $("meta[name='csrf-token']").attr("content");
+            swal({
+                title: "¿Estás seguro?",
+                text: 'El comportamiento del crédito cambiará',
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "Cancelar",
+                        visible: true,
+                        className: "swal-button--danger",
+                        classModal: true
+                    },
+                    confirm: {
+                        text: "Si",
+                        value: true,
+                        visible: true,
+                        className: "swal-button--confirm",
+                        closeModal: true
+                    }
+                },
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax(
+                    {
+                        url:"/creditos-behavior/"+credit_id,
+                        type: "GET",
+                        data: {
+                            "id": credit_id,
+                            "_token": token,
+                        },
+                        success: function (response){
+                            if(response.status) {
+                                swal("Comportamiento cambiado correctamente", {
+                                    icon: "success",
+                                });
+                                creditsTable.draw();
+                            }
                         }
                     });
                 }

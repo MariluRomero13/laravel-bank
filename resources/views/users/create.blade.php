@@ -47,7 +47,7 @@
                                 <i class="fa fa-save"></i> Guardar
                             </button>
                             <a type="button" class="btn btn-default pull-left" href="{{ route('usuarios.index') }}">
-                                <i class="fa fa-close"></i> Volver
+                                <i class="fa fa-arrow-left"></i> Volver
                             </a>
                         </div>
                     </form>

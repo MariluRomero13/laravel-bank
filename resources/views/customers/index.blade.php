@@ -37,7 +37,7 @@
                         <tbody>
                             @foreach ( $customers as $customer )
                                 <tr>
-                                    <td>{{ $customer->name }} {{ $customer->fist_last_name }} {{ $customer->second_last_name }}</td>
+                                    <td>{{ $customer->name }} {{ $customer->first_last_name }} {{ $customer->second_last_name }}</td>
                                     <td>{{ $customer->curp }}</td>
                                     <td>{{ $customer->rfc }}</td>
                                     <td>
