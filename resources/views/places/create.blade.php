@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.app')
 
 @section('title')
-	Usuarios
+	Instituciones
 @endsection
 
 @section('links')
@@ -14,9 +14,9 @@
 			<div class="col-md-8 col-md-offset-2">
 				<div class="box">
 					<div class="box-header with-border">
-						<h3 class="box-title">Registrar usuarios</h3>
+						<h3 class="box-title">Registrar instituciones</h3>
 					</div>
-                    <form action="{{ route('usuarios.store') }}" method="POST">
+                    <form action="{{ route('instituciones.store') }}" method="POST">
 					    <div class="box-body">
                             @if (count($errors) > 0)
                                 <div class="alert alert-danger">
@@ -30,23 +30,15 @@
                             @endif
                             {{ csrf_field() }}
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Nombre de usuario" id="name" name="name" required autofocus value="{{ old('name') }}">
+                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                <input type="text" class="form-control" placeholder="Nombre de la institución" id="name" name="name"  autofocus value="{{ old('name') }}">
                             </div><br>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="Correo" id="email" name="email" required autofocus value="{{ old('email') }}">
-                            </div><br>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="password" class="form-control" placeholder="Contraseña" id="password" name="password" required autofocus value="{{ old('password') }}">
-                            </div>
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-default pull-right button-modal-style">
                                 <i class="fa fa-save"></i> Guardar
                             </button>
-                            <a type="button" class="btn btn-default pull-left" href="{{ route('usuarios.index') }}">
+                            <a type="button" class="btn btn-default pull-left" href="{{ route('instituciones.index') }}">
                                 <i class="fa fa-arrow-left"></i> Volver
                             </a>
                         </div>

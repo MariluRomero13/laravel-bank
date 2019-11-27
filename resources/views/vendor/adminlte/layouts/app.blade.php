@@ -37,6 +37,5 @@
         @show
 
         @yield('script')
-
     </body>
 </html>

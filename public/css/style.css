@@ -35,3 +35,7 @@
     border-color: #0070d6 !important;
     color: white !important;
 }
+
+.ocultar {
+    display: none;
+}

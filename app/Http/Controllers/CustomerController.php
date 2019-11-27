@@ -112,4 +112,33 @@ class CustomerController extends Controller
             'status' => $customer->status
         ]);
     }
+
+    public function searchClient(Request $request)
+    {
+        if ($request->get('value') != null) {
+            $customer = Customer::whereDoesntHave('creditBureau')->get();
+            switch ($request->get('option')) {
+                case 1:
+                    $c = $customer->where('name', $request->get('value'));
+                    break;
+                case 2:
+                    $c = $customer->where('rfc', $request->get('value'));
+                    break;
+                case 3:
+                    $c = $customer->where('curp', $request->get('value'));
+                    break;
+                case 4:
+                    $c = $customer->where('birthdate', $request->get('value'));
+                    break;
+            }
+        } else {
+            return ['status' => 0];
+        }
+
+        if ($c->count() > 0) {
+            return ["customer" => $c, "status" => 1];
+        } else {
+            return ["status" => 2];
+        }
+    }
 }

@@ -25,6 +25,14 @@ Route::resource('/direcciones', 'AddressController')->except(['edit', 'destroy',
 Route::get('/clientes/registrar/direcciones/{id}', 'AddressController@create');
 Route::get('/clientes/editar/direcciones/{id}', 'AddressController@edit');
 
+Route::resource('/instituciones', 'PlaceController')->except(['show', 'destroy']);
+Route::get('institucion-editar/{id}', 'PlaceController@edit');
+Route::resource('/clientes', 'CustomerController');
+Route::post('/searchClient', 'CustomerController@searchClient');
+Route::resource('/creditos', 'CreditController')->except(['edit', 'destroy']);
+Route::get('creditos-editar/{id}', 'CreditController@edit');
+Route::get('creditos-destroy/{id}', 'CreditController@destroy');
+Route::get('creditos-behavior/{id}', 'CreditController@behavior');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware
