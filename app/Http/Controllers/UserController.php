@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUsers;
 use App\Http\Requests\UpdateUsers;
-use Illuminate\Support\Facades\Crypt;
-use Datatables;
 use DB;
 
 class UserController extends Controller
@@ -99,7 +97,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('users.edit', compact('user', 'id'));
+        return view('users.edit', compact('user'));
     }
 
     /**

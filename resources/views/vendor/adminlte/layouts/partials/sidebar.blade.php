@@ -27,9 +27,9 @@
                     <li><a href="{{ url('clientes') }}"><i class='fa fa-user-secret'></i><span>Clientes</span></a></li>
                     <li><a href="#"><i class='fa fa-university'></i><span>Instituciones</span></a></li>
                     <li><a href="#"><i class='fa fa-credit-card'></i><span>Tarjetas</span></a></li>
-                    <li><a href="#"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
+                    <li><a href="{{ url('creditos') }}"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
                     <li><a href="#"><i class='fa fa-balance-scale'></i><span>Préstamos</span></a></li>
-                    <li><a href="#"><i class='fa fa-money'></i><span>PAgos</span></a></li>
+                    <li><a href="#"><i class='fa fa-money'></i><span>Pagos</span></a></li>
                     <li class="treeview">
                         <a href="#"><i class='fa fa-file'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">

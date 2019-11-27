@@ -23,7 +23,7 @@ class CustomersTableSeeder extends Seeder
         ]);
 
         DB::table('customers')->insert([
-            'user_id' => 2,
+            'user_id' => 3,
             'name' => 'Marina',
             'first_last_name' => 'Montoya',
             'second_last_name' => 'García',

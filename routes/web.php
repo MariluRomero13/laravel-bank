@@ -16,6 +16,11 @@ Route::resource('/usuarios', 'UserController')->except(['edit', 'destroy']);
 Route::get('usuarios-editar/{id}', 'UserController@edit');
 Route::get('users-destroy/{id}', 'UserController@destroy');
 Route::resource('/clientes', 'CustomerController');
+Route::post('/searchClient', 'CustomerController@searchClient');
+Route::resource('/creditos', 'CreditController')->except(['edit', 'destroy']);
+Route::get('creditos-editar/{id}', 'CreditController@edit');
+Route::get('creditos-destroy/{id}', 'CreditController@destroy');
+Route::get('creditos-behavior/{id}', 'CreditController@behavior');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware
