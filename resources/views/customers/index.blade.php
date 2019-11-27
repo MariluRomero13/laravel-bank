@@ -47,19 +47,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#customersTable').DataTable({
-                serverSide: true,
-                ajax: "{{ route('clientes.index') }}",
-                columns: [
-                    {data: 'name'},
-                    {data: 'rfc'},
-                    {data: 'curp'},
-                    {data: 'action'},
-                    {data: 'status'}
-                ]
-            });
-
+        var customersTable = $('#customersTable').DataTable({
+            serverSide: true,
+            ajax: "{{ route('clientes.index') }}",
+            columns: [
+                {data: 'name'},
+                {data: 'rfc'},
+                {data: 'curp'},
+                {data: 'action'},
+                {data: 'status'}
+            ],
+            language: {
+            "info": "_TOTAL_ registros",
+            "search": "Buscar",
+            "paginate": {
+                "next": "Siguiente",
+                "previous": "Anterior",
+            },
+            "lengthMenu": 'Mostrar <select>'+
+                            '<option value="5">5</option>'+
+                            '<option value="10">10</option>'+
+                            '<option value="20">20</option>'+
+                            '<option value="-1">Todos</option>'+
+                            '</select> registros',
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "processing": "Procesando...",
+            "emptyTable": "No hay datos...",
+            "zeroRecords": "No hay coincidencias"
+        }
         });
     </script>
     <script>
@@ -109,7 +125,7 @@
                             swal(content, {
                                 icon: "success",
                             });
-                            usersTable.draw();
+                            customersTable.draw();
                         }
                     });
                 }
