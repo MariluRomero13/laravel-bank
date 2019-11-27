@@ -5,6 +5,7 @@
 @endsection
 
 @section('links')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
@@ -34,31 +35,6 @@
                                 <th>Estado</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ( $customers as $customer )
-                                <tr>
-                                    <td>{{ $customer->name }} {{ $customer->first_last_name }} {{ $customer->second_last_name }}</td>
-                                    <td>{{ $customer->curp }}</td>
-                                    <td>{{ $customer->rfc }}</td>
-                                    <td>
-                                        <a class="btn btn-warning" type="button">
-                                            <i class="fa fa-map-marker"></i>
-                                        </a>
-                                        <a class="btn btn-warning" type="button">
-                                            <i class="fa fa-list"></i>
-                                        </a>
-                                        <a class="btn btn-warning" type="button">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -67,13 +43,77 @@
 @endsection
 
 @section('script')
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
-   $(document).ready(function() {
-        $('#customersTable').DataTable();
+        $(document).ready(function() {
+            $('#customersTable').DataTable({
+                serverSide: true,
+                ajax: "{{ route('clientes.index') }}",
+                columns: [
+                    {data: 'name'},
+                    {data: 'rfc'},
+                    {data: 'curp'},
+                    {data: 'action'},
+                    {data: 'status'}
+                ]
+            });
 
-    });
-</script>
+        });
+    </script>
+    <script>
+        $('body').on('click', '.delete', function (){
+            var customer_id = $(this).data("id");
+            var value = $(this).data("target");
+            var token = $("meta[name='csrf-token']").attr("content");
+            swal({
+                title: "¿Estás seguro?",
+                text: value? 'El cliente se desactivará': 'El cliente se activará',
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "Cancelar",
+                        visible: true,
+                        className: "swal-button--danger",
+                        classModal: true
+                    },
+                    confirm: {
+                        text: "Si",
+                        value: true,
+                        visible: true,
+                        className: "swal-button--confirm",
+                        closeModal: true
+                    }
+                },
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax(
+                    {
+                        url:"/delete-customers/"+customer_id,
+                        type: "GET",
+                        data: {
+                            "id": customer_id,
+                            "_token": token,
+                        },
+                        success: function (response){
+                            var content = "";
+                            if(response.status) {
+                                content ="El cliente se activó correctamente";
+                            }
+                            else {
+                                content ="El cliente se desactivó correctamente";
+                            }
+                            swal(content, {
+                                icon: "success",
+                            });
+                            usersTable.draw();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

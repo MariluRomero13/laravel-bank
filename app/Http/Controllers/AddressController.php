@@ -4,80 +4,70 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Address;
+use App\Models\Customer;
 
 class AddressController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create($id){
+        $customer = Customer::find($id);
+        return view('address.create', compact('customer'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $address = new Address();
+        $customer = Customer::find($request->get('customer_id'));
+        $address->customer_id = $customer->id;
+        $address->street = $request->get('street');
+        $address->external_number = $request->get('external_number');
+        $address->internal_number = $request->get('internal_number');
+        $address->between_streets = $request->get('between_streets');
+        $address->postal_code = $request->get('postal_code');
+        $address->neighborhood = $request->get('neighborhood');
+        $address->country = $request->get('country');
+        $address->state = $request->get('state');
+        $address->city = $request->get('city');
+        $customer->address()->save($address);
+
+        return redirect()->route('clientes.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+
+    public function edit($id){
+        $address = Address::find($id);
+        return view('address.edit', compact('address', 'id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::find($request->get('customer_id'));
+        $address = Address::find($id);
+        $address->street = $request->get('street');
+        $address->external_number = $request->get('external_number');
+        $address->internal_number = $request->get('internal_number');
+        $address->between_streets = $request->get('between_streets');
+        $address->postal_code = $request->get('postal_code');
+        $address->neighborhood = $request->get('neighborhood');
+        $address->country = $request->get('country');
+        $address->state = $request->get('state');
+        $address->city = $request->get('city');
+        $customer->address()->save($address);
+
+        return redirect()->route('clientes.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

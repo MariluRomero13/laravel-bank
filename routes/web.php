@@ -15,7 +15,16 @@ Route::get('/', 'ViewController@welcome');
 Route::resource('/usuarios', 'UserController')->except(['edit', 'destroy']);
 Route::get('usuarios-editar/{id}', 'UserController@edit');
 Route::get('users-destroy/{id}', 'UserController@destroy');
-Route::resource('/clientes', 'CustomerController');
+
+Route::resource('/clientes', 'CustomerController')->except(['edit', 'destroy', 'show']);
+Route::get('/clientes/editar/{id}', 'CustomerController@edit');
+Route::get('/clientes/detalles/{id}', 'CustomerController@show');
+Route::get('delete-customers/{id}', 'CustomerController@destroy');
+
+Route::resource('/direcciones', 'AddressController')->except(['edit', 'destroy', 'create']);
+Route::get('/clientes/registrar/direcciones/{id}', 'AddressController@create');
+Route::get('/clientes/editar/direcciones/{id}', 'AddressController@edit');
+
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware
