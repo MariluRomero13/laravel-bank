@@ -14,6 +14,8 @@
 Route::get('/', 'ViewController@welcome');
 Route::resource('/usuarios', 'UserController');
 Route::resource('/clientes', 'CustomerController');
+Route::resource('/instituciones', 'PlaceController');
+Route::get('/instituciones/{id}','PlaceController@destroy');
 Route::get('users/destroy/{id}', 'UserController@destroy');
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/storeuser', 'UserController@store');

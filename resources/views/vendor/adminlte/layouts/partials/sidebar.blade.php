@@ -23,7 +23,7 @@
             <li><a href="{{ url('home') }}"><i class='fa fa-dashboard'></i><span>Dashboard</span></a></li>
             <li><a href="{{ url('usuarios') }}"><i class='fa fa-users'></i><span>Usuarios</span></a></li>
             <li><a href="{{ url('clientes') }}"><i class='fa fa-user-secret'></i><span>Clientes</span></a></li>
-            <li><a href="#"><i class='fa fa-university'></i><span>Instituciones</span></a></li>
+            <li><a href="{{ url('instituciones') }}"><i class='fa fa-university'></i><span>Instituciones</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-file'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
