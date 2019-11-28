@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Address;
 use App\Models\Customer;
+use App\Http\Requests\StoreAddress;
+use App\Http\Requests\UpdateAddress;
 
 class AddressController extends Controller
 {
@@ -18,7 +20,7 @@ class AddressController extends Controller
         return view('address.create', compact('customer'));
     }
 
-    public function store(Request $request)
+    public function store(StoreAddress $request)
     {
         $address = new Address();
         $customer = Customer::find($request->get('customer_id'));
@@ -50,7 +52,7 @@ class AddressController extends Controller
     }
 
   
-    public function update(Request $request, $id)
+    public function update(UpdateAddress $request, $id)
     {
         $customer = Customer::find($request->get('customer_id'));
         $address = Address::find($id);
