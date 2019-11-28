@@ -8,8 +8,6 @@ class Card extends Model
 {
     public function customer()
     {
-        return $this->belongsToMany('App\Models\Curtomer')->withPivot([
-            'status'
-        ]);
+        return $this->belongsTo('App\Models\Curtomer');
     }
 }

@@ -25,7 +25,7 @@ class CreditsTableSeeder extends Seeder
 
         DB::table('credits')->insert([
             'place_id' => 2,
-            'customer_id' => 1,
+            'customer_id' => 2,
             'credit_type' => 1,
             'description' => 'Nor again is there anyone who loves or pursues or desires to obtain
                                 pain of itself, because it is pain,

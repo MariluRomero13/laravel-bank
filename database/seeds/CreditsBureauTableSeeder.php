@@ -13,6 +13,7 @@ class CreditsBureauTableSeeder extends Seeder
     {
         DB::table('credit_bureaus')->insert([
             'customer_id' => 2,
+            'credit_id' => 2,
             'register_date' => '2018-09-14',
         ]);
     }

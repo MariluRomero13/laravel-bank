@@ -16,8 +16,10 @@ class CreateCreditBureausTable extends Migration
         Schema::create('credit_bureaus', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
+            $table->integer('credit_id')->unsigned();
             $table->date('register_date');
             $table->timestamps();
+            $table->foreign('credit_id')->references('id')->on('credits');
             $table->foreign('customer_id')->references('id')->on('customers');
         });
     }

@@ -22,8 +22,7 @@ class DatabaseSeeder extends Seeder
             PaymentsTableSeeder::class,
             CreditsBureauTableSeeder::class,
             MessagesTableSeeder::class,
-            CardsTableSeeder::class,
-            CardsCustomersTableSeeder::class
+            CardsTableSeeder::class
         ]);
     }
 }

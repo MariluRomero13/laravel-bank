@@ -15,9 +15,12 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->string('card_number', 50)->unique()->primary();
+            $table->integer('customer_id')->unsigned();
             $table->integer('card');
             $table->date('expiration_date');
             $table->integer('card_type');
+            $table->boolean('status')->default(1);
+            $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();
         });
     }

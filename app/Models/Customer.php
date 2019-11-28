@@ -23,9 +23,7 @@ class Customer extends Model
 
     public function card()
     {
-        return $this->belongsToMany('App\Models\Card')->withPivot([
-            'status'
-        ]);
+        return $this->hasMany('App\Models\Card');
     }
 
     public function credit()
