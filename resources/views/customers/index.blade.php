@@ -52,8 +52,8 @@
             ajax: "{{ route('clientes.index') }}",
             columns: [
                 {data: 'name'},
-                {data: 'rfc'},
                 {data: 'curp'},
+                {data: 'rfc'},
                 {data: 'action'},
                 {data: 'status'}
             ],

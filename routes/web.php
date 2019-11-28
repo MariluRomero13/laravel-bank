@@ -20,6 +20,7 @@ Route::resource('/clientes', 'CustomerController')->except(['edit', 'destroy', '
 Route::get('/clientes/editar/{id}', 'CustomerController@edit');
 Route::get('/clientes/detalles/{id}', 'CustomerController@show');
 Route::get('delete-customers/{id}', 'CustomerController@destroy');
+Route::post('/searchClient', 'CustomerController@searchClient');
 
 Route::resource('/direcciones', 'AddressController')->except(['edit', 'destroy', 'create']);
 Route::get('/clientes/registrar/direcciones/{id}', 'AddressController@create');
@@ -27,8 +28,7 @@ Route::get('/clientes/editar/direcciones/{id}', 'AddressController@edit');
 
 Route::resource('/instituciones', 'PlaceController')->except(['show', 'destroy']);
 Route::get('institucion-editar/{id}', 'PlaceController@edit');
-Route::resource('/clientes', 'CustomerController');
-Route::post('/searchClient', 'CustomerController@searchClient');
+
 Route::resource('/creditos', 'CreditController')->except(['edit', 'destroy']);
 Route::get('creditos-editar/{id}', 'CreditController@edit');
 Route::get('creditos-destroy/{id}', 'CreditController@destroy');
