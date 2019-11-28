@@ -13,55 +13,61 @@ use DataTables;
 class CustomerController extends Controller
 {
 
-    public function index(Request $request){
-        if($request->ajax()){
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
             return datatables(Customer::all())
-            ->addColumn('action', function ($row) {
-                $btn = '<a href="/clientes/editar/' . $row->id . '" data-id="' . $row->id . '" class="btn btn-warning" style="margin-right:20px">' .
-                    "<i class='fa fa-edit'></i>"
-                    . '</a>';
-                $btn = $btn.'<a href="/clientes/registrar/direcciones/' . $row->id . '" data-id="' . $row->id . '" class="btn btn-danger" style="margin-right:20px">' .
-                "<i class='fa fa-plus'></i>"
-                . '</a>';
-
-                $btn = $btn.'<a href="/clientes/detalles/' . $row->id . '" data-id="' . $row->id . '" class="btn btn-info" style="margin-right:20px">' .
-                "<i class='fa fa-list'></i>"
-                . '</a>';
-                
-                return $btn;
-            })
-            ->addColumn('status', function ($row) {
-                if ($row->status) {
-                    $btn = '<a data-id="' . $row->id . '" class="btn btn-success delete" data-target="' . $row->status . '">' .
-                        "<i class='fa fa-check'></i>"
+                ->addColumn('name', function ($row) {
+                    $td = '<td>' . $row->name . ' ' . $row->first_last_name . '  ' . $row->second_last_name . ' </td>';
+                    return $td;
+                })
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="/clientes/editar/' . $row->id . '" data-id="' . $row->id . '" class="btn btn-warning" style="margin-right:20px">' .
+                        "<i class='fa fa-edit'></i>"
                         . '</a>';
-                } else {
-                    $btn = '<a data-id="' . $row->id . '" class="btn btn-danger delete">' .
-                        "<i class='fa fa-close'></i>"
+                    $btn = $btn . '<a href="/clientes/registrar/direcciones/' . $row->id . '" data-id="' . $row->id . '" class="btn btn-danger" style="margin-right:20px">' .
+                        "<i class='fa fa-plus'></i>"
                         . '</a>';
-                }
 
-                return $btn;
-            })
-            ->rawColumns(['action', 'status'])
-            ->toJson();
+                    $btn = $btn . '<a href="/clientes/detalles/' . $row->id . '" data-id="' . $row->id . '" class="btn btn-info" style="margin-right:20px">' .
+                        "<i class='fa fa-list'></i>"
+                        . '</a>';
+
+                    return $btn;
+                })
+                ->addColumn('status', function ($row) {
+                    if ($row->status) {
+                        $btn = '<a data-id="' . $row->id . '" class="btn btn-success delete" data-target="' . $row->status . '">' .
+                            "<i class='fa fa-check'></i>"
+                            . '</a>';
+                    } else {
+                        $btn = '<a data-id="' . $row->id . '" class="btn btn-danger delete">' .
+                            "<i class='fa fa-close'></i>"
+                            . '</a>';
+                    }
+
+                    return $btn;
+                })
+                ->rawColumns(['name', 'action', 'status'])
+                ->toJson();
         }
         return view('customers.index');
-            
     }
 
-    public function create(){
+    public function create()
+    {
         return view('customers.create');
     }
 
-    public function store(StoreCustomers $request){
+    public function store(StoreCustomers $request)
+    {
         $user = new User();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->password = bcrypt($request->get('password'));
         $user->role_id = 2;
         $user->save();
-        
+
         //$u = User::find($user->id);
         $customer = new Customer();
         $customer->user_id = $user->id;
@@ -74,23 +80,26 @@ class CustomerController extends Controller
         $customer->phone = $request->get('phone');
         $customer->save();
         //$u->customer()->save($customer);
-        return redirect()->route('clientes.index');        
+        return redirect()->route('clientes.index');
     }
 
- 
-    public function show($id){
+
+    public function show($id)
+    {
         $customer = Customer::find($id);
         $address = $customer->address()->get();
         return view('customers.detail', compact('address'));
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $customer = Customer::find($id);
         $user = User::find($customer->user_id);
-        return view('customers.edit', compact('customer', 'user','id'));
+        return view('customers.edit', compact('customer', 'user', 'id'));
     }
 
-    public function update(UpdateCustomers $request, $id){
+    public function update(UpdateCustomers $request, $id)
+    {
         $customer = Customer::find($id);
         $customer->name = $request->get('name_customer');
         $customer->first_last_name = $request->get('first_last_name');
@@ -99,11 +108,12 @@ class CustomerController extends Controller
         $customer->rfc = $request->get('rfc');
         $customer->birthdate = $request->get('birthdate');
         $customer->phone = $request->get('phone');
-        $customer->save();  
-        return redirect()->route('clientes.index');         
+        $customer->save();
+        return redirect()->route('clientes.index');
     }
-   
-    public function destroy($id){
+
+    public function destroy($id)
+    {
         $customer = Customer::find($id);
         $customer->status = !$customer->status;
         $customer->save();
