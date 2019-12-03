@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/customerdashboard',function(){
+    return view('customer-view.dashboard');
+});
+
 Route::get('/', 'ViewController@welcome');
 Route::resource('/usuarios', 'UserController')->except(['edit', 'destroy']);
 Route::get('usuarios-editar/{id}', 'UserController@edit');
