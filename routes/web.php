@@ -16,6 +16,12 @@ Route::resource('/usuarios', 'UserController')->except(['edit', 'destroy']);
 Route::get('usuarios-editar/{id}', 'UserController@edit');
 Route::get('users-destroy/{id}', 'UserController@destroy');
 
+Route::resource('/pagos', 'PaymentController');
+Route::get('/pagos', 'PaymentController@index');
+Route::get('/pagos-detalles/{id}', 'PaymentController@show');
+
+
+
 Route::resource('/clientes', 'CustomerController')->except(['edit', 'destroy', 'show']);
 Route::get('/clientes/editar/{id}', 'CustomerController@edit');
 Route::get('/clientes/detalles/{id}', 'CustomerController@show');
