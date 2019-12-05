@@ -17,6 +17,26 @@
                     <h3 class="box-title">Informacíon del Cliente</h3>
                 </div>
                 <div class="box-body">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" value="{{ $customer->name }} {{ $customer->first_last_name }} {{ $customer->second_last_name }}" disabled>
+                    </div> <br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
+                        <input type="text" class="form-control" value="{{ $customer->curp }}" disabled>
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
+                        <input type="text" class="form-control" value="{{ $customer->rfc }}" disabled>
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" class="form-control" value="{{ $customer->birthdate }}" disabled>
+                    </div> <br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                        <input type="text" class="form-control" value="{{ $customer->phone }}" disabled>
+                    </div>
                 </div>    
                 <div class="box-footer">
                 </div>    

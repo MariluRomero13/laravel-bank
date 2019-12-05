@@ -93,7 +93,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::find($id);
         $address = $customer->address()->get();
-        return view('customers.detail', compact('address'));
+        return view('customers.detail', compact('address', 'customer'));
     }
 
     public function edit($id)
