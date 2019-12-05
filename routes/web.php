@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/customerdashboard',function(){
+Route::get('/customerdashboard', function () {
     return view('customer-view.dashboard');
 });
 
@@ -37,6 +37,12 @@ Route::resource('/creditos', 'CreditController')->except(['edit', 'destroy']);
 Route::get('creditos-editar/{id}', 'CreditController@edit');
 Route::get('creditos-destroy/{id}', 'CreditController@destroy');
 Route::get('creditos-behavior/{id}', 'CreditController@behavior');
+
+Route::resource('/buro-credito', 'CreditBureauController')->only(['index']);
+Route::get('/buro-credito-mensajes/{id}', 'CreditBureauController@messageView');
+Route::get('/buro-credito-reportes/{id}', 'CreditBureauController@reportView');
+Route::get('/buro-destroy/{id}', 'CreditBureauController@destroy');
+Route::post('/registrar-mensaje', 'CreditBureauController@addMessages');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware

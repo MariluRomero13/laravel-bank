@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Credit;
 use App\Models\Customer;
+use App\Models\CreditBureau;
 use App\Models\Place;
 use Datatables;
 use DB;
+use Carbon\Carbon;
 
 class CreditController extends Controller
 {
@@ -29,7 +31,7 @@ class CreditController extends Controller
                 'c.description',
                 'c.behavior',
                 'c.status'
-            );
+            )->where('c.behavior', '=', 1)->Orwhere('c.behavior', '=', 2);
         if ($request->ajax()) {
 
             return datatables()
@@ -58,11 +60,6 @@ class CreditController extends Controller
                         case 2:
                             $btn = '<a data-id="' . $row->credit_id . '" class="btn btn-warning behavior" data-target="' . $row->behavior . '">' .
                                 "<i class='fa fa-minus'></i>"
-                                . '</a>';
-                            break;
-                        case 3:
-                            $btn = '<a data-id="' . $row->credit_id . '" class="btn btn-danger behavior" data-target="' . $row->behavior . '">' .
-                                "<i class='fa fa-close'></i>"
                                 . '</a>';
                             break;
                     }
@@ -183,15 +180,17 @@ class CreditController extends Controller
     public function behavior($id)
     {
         $credit = Credit::find($id);
+        $buro = new CreditBureau();
         switch ($credit->behavior) {
             case 1:
                 $credit->behavior = 2;
                 break;
             case 2:
                 $credit->behavior = 3;
-                break;
-            case 3:
-                $credit->behavior = 1;
+                $buro->customer_id = $credit->customer_id;
+                $buro->credit_id = $credit->id;
+                $buro->register_date = Carbon::now()->format('Y-m-d');
+                $buro->save();
                 break;
         }
         $credit->save();

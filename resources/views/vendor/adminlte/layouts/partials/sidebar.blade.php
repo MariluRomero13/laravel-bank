@@ -28,6 +28,7 @@
                     <li><a href="{{ url('instituciones') }}"><i class='fa fa-university'></i><span>Instituciones</span></a></li>
                     <li><a href="#"><i class='fa fa-credit-card'></i><span>Tarjetas</span></a></li>
                     <li><a href="{{ url('creditos') }}"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
+                    <li><a href="{{ url('buro-credito') }}"><i class='fa fa-book'></i><span>Buro</span></a></li>
                     <li><a href="#"><i class='fa fa-balance-scale'></i><span>Préstamos</span></a></li>
                     <li><a href="#"><i class='fa fa-money'></i><span>Pagos</span></a></li>
                     <li class="treeview">
