@@ -10,12 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('pruebas', 'CustomerController@pruebas');
-Route::get('/cliente-dashboard', 'CustomerController@dashboardView');
 Route::get('/cliente-tarjetas', 'CustomerController@tarjetasView');
 Route::get('/cliente-creditos', 'CustomerController@creditosView');
 Route::get('/cliente-prestamos', 'CustomerController@prestamosView');
 Route::get('/cliente-buró', 'CustomerController@buroView');
+Route::get('/cliente-pagos/{id}', 'CustomerController@pagosView');
 
 Route::get('/', 'ViewController@welcome');
 Route::resource('/usuarios', 'UserController')->except(['edit', 'destroy']);

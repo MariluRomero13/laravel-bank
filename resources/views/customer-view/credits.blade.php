@@ -25,7 +25,7 @@
                             <thead>
                               <tr>
                                 <th scope="col">Institución</th>
-                                <th scope="col">Tipo crédito</th>
+                                <th scope="col">Tipo</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Comportamiento</th>
@@ -34,11 +34,11 @@
                             <tbody>
                             @foreach ($credits as $credit)
                             <tr>
-                                    
+
                                     <td>
                                         {{$credit->name}}
                                     </td>
-                                   
+
                                     <td>
                                             @switch($credit->credit_type)
                                             @case(1)
@@ -51,29 +51,42 @@
                                     </td>
                                     <td>{{$credit->description}}</td>
                                     <td>
-                                            @switch($credit->status)
+                                        @switch($credit->status)
                                             @case(1)
-                                                Activo
+                                                <a class="btn btn-success">
+                                                    <i class="fa fa-check"></i>
+                                                </a>
                                                 @break
                                             @case(2)
-                                                Inactivo
+                                                <a class="btn btn-danger">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
                                                 @break
                                         @endswitch
                                     </td>
                                     <td>
                                             @switch($credit->behavior)
                                             @case(1)
-                                                Bancario
+                                                <a class="btn btn-success">
+                                                    <i class="fa fa-check"></i>
+                                                </a>
                                                 @break
                                             @case(2)
-                                                No bancario
+                                                <a class="btn btn-warning">
+                                                    <i class="fa fa-minus"></i>
+                                                </a>
+                                                @break
+                                            @case(3)
+                                                <a class="btn btn-danger">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
                                                 @break
                                         @endswitch
                                     </td>
-                                    
+
                             </tr>
                             @endforeach
-                              
+
                             </tbody>
                           </table>
             </div>

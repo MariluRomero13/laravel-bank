@@ -26,27 +26,32 @@
                         <thead>
                             <tr>
                                 <th>Institucion</th>
-                                <th>Crédito</th>
-                                <th>Descripcion</th>
                                 <th>Años a pagar</th>
                                 <th>Tipo de pago</th>
                                 <th>Interes</th>
                                 <th>Prestamo</th>
                                 <th>Total a pagar</th>
                                 <th>Fecha de prestamo</th>
+                                <th>Pagos</th>
                             </tr>
                             @foreach($loans as $loan)
                                 <tr>
                                     <td>{{$loan->name}}</td>
-                                    <td>{{$loan->credit_type}}</td>
-                                    <td>{{$loan->description}}</td>
                                     <td>{{$loan->years_to_pay}}</td>
-                                    <td>{{$loan->payment_type}}</td>
+                                    @if($loan->payment_type == 1)
+                                        <td>Mensual</td>
+                                    @else
+                                        <td>Quincenal</td>
+                                    @endif
                                     <td>{{$loan->interest_rate}}</td>
                                     <td>{{$loan->loan_amount}}</td>
                                     <td>{{$loan->total_amount_to_pay}}</td>
                                     <td>{{$loan->loan_date}}</td>
-                                    
+                                    <td>
+                                        <a href="{{ url('cliente-pagos', $loan->loan_id) }}" class="btn btn-info">
+                                            <i class="fa fa-money"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </thead>

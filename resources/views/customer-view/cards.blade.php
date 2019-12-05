@@ -24,10 +24,10 @@
                     <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th scope="col">Número</th>
-                                <th scope="col">Empresa</th>
-                                <th scope="col">Fecha de expiración</th>
+                                <th scope="col">Número de tarjeta</th>
                                 <th scope="col">Tipo</th>
+                                <th scope="col">Fecha de expiración</th>
+                                <th scope="col">Categoría</th>
                                 <th scope="col">Estado</th>
                               </tr>
                             </thead>
@@ -60,19 +60,23 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                            @switch($card->status)
+                                        @switch($card->status)
                                             @case(1)
-                                                Activa
+                                                <a class="btn btn-success">
+                                                    <i class="fa fa-check"></i>
+                                                </a>
                                                 @break
                                             @case(2)
-                                                Inactiva
-                                                @break
+                                                <a class="btn btn-danger">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                            @break
                                         @endswitch
                                     </td>
-                                    
+
                             </tr>
                             @endforeach
-                              
+
                             </tbody>
                           </table>
 
