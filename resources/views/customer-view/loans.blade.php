@@ -25,13 +25,30 @@
                     <table id="loansTable" class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>Institucion</th>
                                 <th>Crédito</th>
+                                <th>Descripcion</th>
                                 <th>Años a pagar</th>
+                                <th>Tipo de pago</th>
                                 <th>Interes</th>
                                 <th>Prestamo</th>
                                 <th>Total a pagar</th>
                                 <th>Fecha de prestamo</th>
                             </tr>
+                            @foreach($loans as $loan)
+                                <tr>
+                                    <td>{{$loan->name}}</td>
+                                    <td>{{$loan->credit_type}}</td>
+                                    <td>{{$loan->description}}</td>
+                                    <td>{{$loan->years_to_pay}}</td>
+                                    <td>{{$loan->payment_type}}</td>
+                                    <td>{{$loan->interest_rate}}</td>
+                                    <td>{{$loan->loan_amount}}</td>
+                                    <td>{{$loan->total_amount_to_pay}}</td>
+                                    <td>{{$loan->loan_date}}</td>
+                                    
+                                </tr>
+                            @endforeach
                         </thead>
                     </table>
                 </div>
@@ -44,34 +61,5 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
-    <script>
-        $('#loansTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('instituciones.index') }}",
-            columns: [
-                {data: 'name', name: 'name'},
-                {data: 'action', name: 'action'}
-            ],
-            language: {
-                "info": "_TOTAL_ registros",
-                "search": "Buscar",
-                "paginate": {
-                    "next": "Siguiente",
-                    "previous": "Anterior",
-                },
-                "lengthMenu": 'Mostrar <select>'+
-                                '<option value="5">5</option>'+
-                                '<option value="10">10</option>'+
-                                '<option value="20">20</option>'+
-                                '<option value="-1">Todos</option>'+
-                                '</select> registros',
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "processing": "Procesando...",
-                "emptyTable": "No hay datos...",
-                "zeroRecords": "No hay coincidencias"
-            }
-        });
-    </script>
+
 @endsection

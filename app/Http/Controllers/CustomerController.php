@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\Credit;
 use App\Models\Address;
+use App\Models\Card;
 use App\Http\Requests\StoreCustomers;
 use App\Http\Requests\UpdateCustomers;
 use DataTables;
+use Auth;
+use DB;
 
 class CustomerController extends Controller
 {
@@ -150,5 +154,70 @@ class CustomerController extends Controller
         } else {
             return ["status" => 2];
         }
+    }
+
+    public function getCardsByCustomer() {
+        $user = Auth::user()->id; 
+        $customer = Customer::where('user_id', $user)->get();
+        $cards = DB::table('customers as cu')
+        ->join('cards as t', 'cu.id', '=', 't.customer_id')
+        ->select('t.card_number', 't.card', 't.card_type', 't.expiration_date', 't.status')
+        ->get();
+        return $cards;
+    }
+
+    public function dashboardView(){
+        $customer=Customer::where('user_id',Auth::user()->id)->first();
+        $loans=Customer::where('user_id',Auth::user()->id)->with('loan')->count();
+        $cards=Customer::where('user_id',Auth::user()->id)->with('card')->count();
+        $credits=Customer::where('user_id',Auth::user()->id)->with('credit')->count();
+        $adresses=Address::where('customer_id',$customer->id)->get();
+
+        return view('customer-view.dashboard',compact('cards','credits','loans','customer','adresses'));
+    }
+
+    public function tarjetasView(){
+        $customer=Customer::where('user_id',Auth::user()->id)->first();
+        $cards=Card::where('customer_id',$customer->id)->get();
+        return view('customer-view.cards',compact('cards'));
+    }
+
+    public function creditosView(){
+        $customer=Customer::where('user_id',Auth::user()->id)->first();
+        $credits=DB::table('credits')->join('places','credits.place_id','=','places.id')
+        ->select('places.name','credits.credit_type','credits.description','credits.status','credits.behavior')
+        ->where('credits.customer_id',$customer->id)
+        ->get();
+
+        return view('customer-view.credits',compact('credits'));
+    }
+
+    public function prestamosView(){
+        $customer=Customer::where('user_id',Auth::user()->id)->first();
+        $loans=DB::table('credits')->join('places','credits.place_id','=','places.id')->join('loans','credits.id','=','loans.credit_id')
+        ->select('places.name','credits.credit_type','credits.description','loans.years_to_pay','loans.payment_type','loans.interest_rate','loans.loan_amount','loans.total_amount_to_pay','loans.loan_date')
+        ->where('credits.customer_id',$customer->id)
+        ->get();
+        
+        return view('customer-view.loans',compact('loans'));
+    }
+
+    public function buroView(){
+        $customer=Customer::where('user_id',Auth::user()->id)->first();
+        $buro=DB::table('credits')
+        ->join('places','places.id','=','credits.place_id')
+        ->join('credit_bureaus','credit_bureaus.credit_id','=','credits.id')
+        ->join('loans','loans.credit_id','=','credits.id')
+        ->join('messages','messages.credit_bureaus_id','=','credit_bureaus.id')
+        ->select('places.name','loans.years_to_pay','loans.interest_rate','loans.loan_amount','total_amount_to_pay','loans.loan_date','messages.message')
+        ->where('credit_bureaus.customer_id',$customer->id)
+        ->get();
+        
+        return view('customer-view.credit-bureau',compact('buro'));
+    }
+
+    public function pruebas(){
+        $cards=Customer::where('id',Auth::user())->with('card')->get();
+        return view("customer-view",compact("cards"));
     }
 }

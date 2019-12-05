@@ -21,19 +21,61 @@
             </div>
             <div class="box-body">
 
-                <div class="table-responsive" style="margin-top: 2%;">
-                    <table id="cardsTable" class="table table-bordered table-hover">
-                        <thead>
+                    <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">Número</th>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">Fecha de expiración</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($cards as $card)
                             <tr>
-                                <th>Numero de tarjeta</th>
-                                <th>Acción</th>
-                                <th>Tarjeta</th>
-                                <th>Fecha de expiración</th>
-                                <th>Tipo</th>
+                                    <th scope="row">{{$card->card_number}}</th>
+                                    <td>
+                                            @switch($card->card)
+                                            @case(1)
+                                                MasterCard
+                                                @break
+                                            @case(2)
+                                                Visa
+                                                @break
+                                            @case(3)
+                                                CityBanamex
+                                                @break
+                                             @endswitch
+                                    </td>
+                                    <td>{{$card->expiration_date}}</td>
+                                    <td>
+                                            @switch($card->card_type)
+                                            @case(1)
+                                                Crédito
+                                                @break
+                                            @case(2)
+                                                Débito
+                                                @break
+                                        @endswitch
+                                    </td>
+                                    <td>
+                                            @switch($card->status)
+                                            @case(1)
+                                                Activa
+                                                @break
+                                            @case(2)
+                                                Inactiva
+                                                @break
+                                        @endswitch
+                                    </td>
+                                    
                             </tr>
-                        </thead>
-                    </table>
-                </div>
+                            @endforeach
+                              
+                            </tbody>
+                          </table>
+
             </div>
           </div>
     </section>
@@ -41,36 +83,4 @@
 
 @section('script')
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
-    <script>
-        $('#cardsTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('instituciones.index') }}",
-            columns: [
-                {data: 'name', name: 'name'},
-                {data: 'action', name: 'action'}
-            ],
-            language: {
-                "info": "_TOTAL_ registros",
-                "search": "Buscar",
-                "paginate": {
-                    "next": "Siguiente",
-                    "previous": "Anterior",
-                },
-                "lengthMenu": 'Mostrar <select>'+
-                                '<option value="5">5</option>'+
-                                '<option value="10">10</option>'+
-                                '<option value="20">20</option>'+
-                                '<option value="-1">Todos</option>'+
-                                '</select> registros',
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "processing": "Procesando...",
-                "emptyTable": "No hay datos...",
-                "zeroRecords": "No hay coincidencias"
-            }
-        });
-    </script>
 @endsection

@@ -25,9 +25,25 @@
                     <table id="placesTable" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Acción</th>
+                                <th>Institución</th>
+                                <th>Años a pagar</th>
+                                <th>Tasa de interes</th>
+                                <th>Monto del prestamo</th>
+                                <th>Total a pagar</th>
+                                <th>Fecha del prestamo</th>
+                                <th>Mensaje</th>
                             </tr>
+                            @foreach($buro as $b)
+                                <tr>
+                                    <td>{{$b->name}}</td>
+                                    <td>{{$b->years_to_pay}}</td>
+                                    <td>{{$b->interest_rate}}</td>
+                                    <td>{{$b->loan_amount}}</td>
+                                    <td>{{$b->total_amount_to_pay}}</td>
+                                    <td>{{$b->loan_date}}</td>
+                                    <td>{{$b->message}}</td>
+                                </tr>
+                            @endforeach
                         </thead>
                     </table>
                 </div>
@@ -40,34 +56,5 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
-    <script>
-        $('#placesTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('instituciones.index') }}",
-            columns: [
-                {data: 'name', name: 'name'},
-                {data: 'action', name: 'action'}
-            ],
-            language: {
-                "info": "_TOTAL_ registros",
-                "search": "Buscar",
-                "paginate": {
-                    "next": "Siguiente",
-                    "previous": "Anterior",
-                },
-                "lengthMenu": 'Mostrar <select>'+
-                                '<option value="5">5</option>'+
-                                '<option value="10">10</option>'+
-                                '<option value="20">20</option>'+
-                                '<option value="-1">Todos</option>'+
-                                '</select> registros',
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "processing": "Procesando...",
-                "emptyTable": "No hay datos...",
-                "zeroRecords": "No hay coincidencias"
-            }
-        });
-    </script>
+
 @endsection

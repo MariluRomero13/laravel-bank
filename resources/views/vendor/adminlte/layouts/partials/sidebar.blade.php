@@ -39,11 +39,11 @@
                         </ul>
                     </li>
                 @else
-                    <li><a href="#"><i class='fa fa-dashboard'></i><span>Dashboard</span></a></li>
-                    <li><a href="#"><i class='fa fa-credit-card'></i><span>Tarjetas</span></a></li>
-                    <li><a href="#"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
-                    <li><a href="#"><i class='fa fa-balance-scale'></i><span>Préstamos</span></a></li>
-                    <li><a href="#"><i class='fa fa-money'></i><span>Buro de crédito</span></a></li>
+                    <li><a href="{{ url('cliente-dashboard') }}"><i class='fa fa-dashboard'></i><span>Dashboard</span></a></li>
+                    <li><a href="{{ url('cliente-tarjetas') }}"><i class='fa fa-credit-card'></i><span>Tarjetas</span></a></li>
+                    <li><a href="{{ url('cliente-creditos') }}"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
+                    <li><a href="{{ url('cliente-prestamos') }}"><i class='fa fa-balance-scale'></i><span>Préstamos</span></a></li>
+                    <li><a href="{{ url('cliente-buró') }}"><i class='fa fa-money'></i><span>Buro de crédito</span></a></li>
                 @endif
             </ul><!-- /.sidebar-menu -->
         @endif
