@@ -11,7 +11,7 @@
 @section('main-content')
 <div class="container-fluid spark-screen">
     <div class="row">
-        <!--div class="col-md-4">
+        <div class="col-md-4">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Informacíon del Cliente</h3>
@@ -21,8 +21,8 @@
                 <div class="box-footer">
                 </div>    
             </div>
-        </div-->
-        <div class="col-md-12">
+        </div>
+        <div class="col-md-8">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Direcciones</h3>

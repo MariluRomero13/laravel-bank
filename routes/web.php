@@ -29,6 +29,9 @@ Route::get('/clientes/editar/direcciones/{id}', 'AddressController@edit');
 Route::resource('/instituciones', 'PlaceController')->except(['show', 'destroy']);
 Route::get('institucion-editar/{id}', 'PlaceController@edit');
 
+Route::resource('/tarjetas', 'CardController');
+Route::get('delete-cards/{id}', 'CardController@destroy');
+
 Route::resource('/creditos', 'CreditController')->except(['edit', 'destroy']);
 Route::get('creditos-editar/{id}', 'CreditController@edit');
 Route::get('creditos-destroy/{id}', 'CreditController@destroy');
