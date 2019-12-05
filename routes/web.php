@@ -22,6 +22,12 @@ Route::resource('/usuarios', 'UserController')->except(['edit', 'destroy']);
 Route::get('usuarios-editar/{id}', 'UserController@edit');
 Route::get('users-destroy/{id}', 'UserController@destroy');
 
+Route::resource('/pagos', 'PaymentController');
+Route::get('/pagos', 'PaymentController@index');
+Route::get('/pagos-detalles/{id}', 'PaymentController@show');
+
+
+
 Route::resource('/clientes', 'CustomerController')->except(['edit', 'destroy', 'show']);
 Route::get('/clientes/editar/{id}', 'CustomerController@edit');
 Route::get('/clientes/detalles/{id}', 'CustomerController@show');
@@ -42,6 +48,12 @@ Route::get('creditos-behavior/{id}', 'CreditController@behavior');
 Route::get('tarjetas-cliente', 'CustomerController@getCardsByCustomer');
 
 
+
+Route::resource('/buro-credito', 'CreditBureauController')->only(['index']);
+Route::get('/buro-credito-mensajes/{id}', 'CreditBureauController@messageView');
+Route::get('/buro-credito-reportes/{id}', 'CreditBureauController@reportView');
+Route::get('/buro-destroy/{id}', 'CreditBureauController@destroy');
+Route::post('/registrar-mensaje', 'CreditBureauController@addMessages');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware
