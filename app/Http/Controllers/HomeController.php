@@ -9,6 +9,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\Address;
+use App\Models\Card;
+use App\Models\Credit;
+use App\Models\Customer;
+use App\Models\Loan;
 
 /**
  * Class HomeController
@@ -33,6 +39,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('adminlte::home');
+        $user = Auth::user()->role_id;
+        if ($user == 2) {
+            $customer = Customer::where('user_id', Auth::user()->id)->first();
+            $loans = Loan::where('customer_id', '=', $customer->id)->count();
+            $cards =  Card::where('customer_id', '=', $customer->id)->count();
+            $credits =  Credit::where('customer_id', '=', $customer->id)->count();
+            $adresses = Address::where('customer_id', $customer->id)->get();
+            return view('vendor.adminlte.home', compact('cards', 'credits', 'loans', 'customer', 'adresses'));
+        } else {
+            $customers = Customer::count();
+            $loans = Loan::count();
+            $credits = Credit::count();
+            $cards = Card::count();
+            return view('adminlte::home', compact('customers', 'loans', 'credits', 'cards'));
+        }
     }
 }

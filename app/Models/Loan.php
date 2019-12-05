@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Loan extends Model
 {
+    protected $table = 'loans'; 
     public function payment()
     {
         return $this->hasMany('App\Models\Payment');
@@ -20,4 +21,7 @@ class Loan extends Model
     {
         return $this->hasMany('App\Models\Credit');
     }
+
+
 }
+
