@@ -30,7 +30,7 @@
                     <li><a href="{{ url('creditos') }}"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
                     <li><a href="{{ url('buro-credito') }}"><i class='fa fa-book'></i><span>Buro</span></a></li>
                     <li><a href="#"><i class='fa fa-balance-scale'></i><span>Préstamos</span></a></li>
-                    <li><a href="#"><i class='fa fa-money'></i><span>Pagos</span></a></li>
+                    <li><a href="{{ url('pagos') }}"><i class='fa fa-money'></i><span>Pagos</span></a></li>
                     <li class="treeview">
                         <a href="#"><i class='fa fa-file'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">

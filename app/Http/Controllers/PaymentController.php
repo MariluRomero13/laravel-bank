@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer;
+use App\Models\Loan;
 use App\Models\Payment;
+use DB;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+         $loans = Loan::orderby('customer_id', 'asc')->paginate(10);
+         $cu = DB::table('customers as c')
+         ->join('loans as l', 'l.customer_id', 'c.id')
+         ->select(DB::raw('CONCAT(c.name," " , c.first_last_name," " , c.second_last_name) as customer'), 'l.loan_amount', 'l.id as loan_id')
+         ->paginate(10);
+        //$loans = DB::select('SELECT * FROM loans');
+        return view('payments.index')->with('cu',$cu); 
     }
 
     /**
@@ -44,9 +48,10 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($loan_id)
     {
-        //
+        $Payment = Payment::where('loan_id', $loan_id)->get();
+        return view ('payments.detail')->with('Payment',$Payment);
     }
 
     /**
