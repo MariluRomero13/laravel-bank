@@ -111,12 +111,11 @@
                         url:"/delete-cards/"+card_id,
                         type: "GET",
                         data: {
-                            "id": card_id,
+                            "card_number": card_id,
                             "_token": token,
                         },
                         success: function (response){
-                            alert("hola");
-                            /*var content = "";
+                            var content = "";
                             if(response.status) {
                                 content ="La tarjeta se activó correctamente";
                             }
@@ -126,7 +125,7 @@
                             swal(content, {
                                 icon: "success",
                             });
-                            cardsTable.draw();*/
+                            cardsTable.draw();
                         }
                     });
                 }

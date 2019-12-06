@@ -17,7 +17,7 @@ class CardController extends Controller
             ->join('customers as cu', 'cu.id', '=', 'c.customer_id')
             ->select(
                 DB::raw(' CONCAT(cu.name ," ", cu.first_last_name ," ", cu.second_last_name) as customer'),
-                'c.card_number as id',
+                'c.card_number',
                 'c.card',
                 'c.card_type',
                 'c.expiration_date',
@@ -54,11 +54,11 @@ class CardController extends Controller
                 })
                 ->addColumn('status', function ($row) {
                     if ($row->status) {
-                        $btn = '<a data-id="' . $row->id . '" class="btn btn-success delete" data-target="' . $row->status . '">' .
+                        $btn = '<a data-id="' . $row->card_number . '" class="btn btn-success delete" data-target="' . $row->status . '">' .
                             "<i class='fa fa-check'></i>"
                             . '</a>';
                     } else {
-                        $btn = '<a data-id="' . $row->id . '" class="btn btn-danger delete" data-target="' . $row->status . '">' .
+                        $btn = '<a data-id="' . $row->card_number . '" class="btn btn-danger delete" data-target="' . $row->status . '">' .
                             "<i class='fa fa-close'></i>"
                             . '</a>';
                     }
@@ -81,7 +81,7 @@ class CardController extends Controller
         $n1 = rand(); 
         $n2 = rand(); 
         $n = $n1.$n2;
-        
+    
         $card = new Card();
         $customer = Customer::find($request->get('customer_id'));
         $card->card_number = $n;
@@ -92,24 +92,9 @@ class CardController extends Controller
         return redirect()->route('tarjetas.index');
     }
 
-    public function show($id)
+    public function destroy($card_number)
     {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        $card = Card::find($id);
+        $card = Card::find($card_number);
         $card->status = !$card->status;
         $card->save();
         return response()->json([
