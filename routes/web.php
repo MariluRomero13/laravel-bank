@@ -25,6 +25,7 @@ Route::get('users-destroy/{id}', 'UserController@destroy');
 Route::resource('/pagos', 'PaymentController');
 Route::get('/pagos', 'PaymentController@index');
 Route::get('/pagos-detalles/{id}', 'PaymentController@show');
+Route::get('/pay/{id}/{loan_id}', 'PaymentController@pay');
 
 
 
