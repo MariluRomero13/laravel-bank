@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get('/cliente-tarjetas', 'CustomerController@tarjetasView');
 Route::get('/cliente-creditos', 'CustomerController@creditosView');
 Route::get('/cliente-prestamos', 'CustomerController@prestamosView');
@@ -52,6 +54,11 @@ Route::get('/buro-credito-mensajes/{id}', 'CreditBureauController@messageView');
 Route::get('/buro-credito-reportes/{id}', 'CreditBureauController@reportView');
 Route::get('/buro-destroy/{id}', 'CreditBureauController@destroy');
 Route::post('/registrar-mensaje', 'CreditBureauController@addMessages');
+
+Route::get('/buscar-cliente', 'CreditBureauController@searchClientView');
+Route::post('/search-buro-customers', 'CreditBureauController@searchBuroCustomer');
+Route::get('/generar-reporte/{id}', 'CreditBureauController@generateReport');
+Route::get('/print-pdf/{id}', 'CreditBureauController@exportPDF');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware

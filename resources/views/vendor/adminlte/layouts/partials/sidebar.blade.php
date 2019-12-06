@@ -26,7 +26,7 @@
                     <li><a href="{{ url('usuarios') }}"><i class='fa fa-users'></i><span>Usuarios</span></a></li>
                     <li><a href="{{ url('clientes') }}"><i class='fa fa-user-secret'></i><span>Clientes</span></a></li>
                     <li><a href="{{ url('instituciones') }}"><i class='fa fa-university'></i><span>Instituciones</span></a></li>
-                    <li><a href="#"><i class='fa fa-credit-card'></i><span>Tarjetas</span></a></li>
+                    <li><a href="{{ url('tarjetas') }}"><i class='fa fa-credit-card'></i><span>Tarjetas</span></a></li>
                     <li><a href="{{ url('creditos') }}"><i class='fa fa-dollar'></i><span>Créditos</span></a></li>
                     <li><a href="{{ url('buro-credito') }}"><i class='fa fa-book'></i><span>Buro</span></a></li>
                     <li><a href="#"><i class='fa fa-balance-scale'></i><span>Préstamos</span></a></li>
@@ -36,7 +36,7 @@
                         <ul class="treeview-menu">
                             <li><a href="#"><i class='fa fa-circle-o'></i><span>Calcular préstamos</span></a></li>
                             <li><a href="#"><i class='fa fa-circle-o'></i><span>Préstamos clientes</span></a></li>
-                            <li><a href="#"><i class='fa fa-circle-o'></i><span>Buro de crédito</span></a></li>
+                            <li><a href="{{ url('buscar-cliente') }}"><i class='fa fa-circle-o'></i><span>Buro de crédito</span></a></li>
                         </ul>
                     </li>
                 @else

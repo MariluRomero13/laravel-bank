@@ -132,18 +132,25 @@ class CustomerController extends Controller
     {
         if ($request->get('value') != null) {
             $customer = Customer::whereDoesntHave('creditBureau')->get();
+            $customers = collect([]);
+            foreach ($customer as $c) {
+                $customers->push([
+                    'id' => $c->id, 'name' => $c->name . ' ' . $c->first_last_name . ' ' . $c->second_last_name,
+                    'rfc' => $c->rfc, 'curp' => $c->curp, 'birthdate' => $c->birthdate
+                ]);
+            }
             switch ($request->get('option')) {
                 case 1:
-                    $c = $customer->where('name', $request->get('value'));
+                    $c = $customers->where('name', $request->get('value'));
                     break;
                 case 2:
-                    $c = $customer->where('rfc', $request->get('value'));
+                    $c = $customers->where('rfc', $request->get('value'));
                     break;
                 case 3:
-                    $c = $customer->where('curp', $request->get('value'));
+                    $c = $customers->where('curp', $request->get('value'));
                     break;
                 case 4:
-                    $c = $customer->where('birthdate', $request->get('value'));
+                    $c = $customers->where('birthdate', $request->get('value'));
                     break;
             }
         } else {
