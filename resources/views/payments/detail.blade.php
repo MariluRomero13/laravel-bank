@@ -34,7 +34,7 @@
                         <th>Pagar</th>
                     </tr>
                 </thead>
-                <tbody> 
+                <tbody>
                     @foreach ($Payment as $a)
                         <tr>
                             <td>{{$a->payment_number}}</td>
