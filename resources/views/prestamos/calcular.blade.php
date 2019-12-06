@@ -18,24 +18,24 @@
                 </div>
                 <div class="box-body">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="Monto de prestamo" id="prestamo" name="prestamo">
+                        <span class="input-group-addon"><i class="fa  fa-dollar"></i></span>
+                        <input type="text" class="form-control" placeholder="Monto de prestamo" id="prestamo" name="prestamo" required>
                     </div><br>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-list"></i></span>
-                        <select  class="form-control" id="tipo_pago" name="tipo_pago">
+                        <span class="input-group-addon"><i class="fa  fa-sort-numeric-desc "></i></span>
+                        <select  class="form-control" id="tipo_pago" name="tipo_pago" required>
                             <option value="0" selected>Selecciona el tipo de pago</option>
                             <option value="1">Mensual</option>
                             <option value="2">Quincenal</option>
                         </select>
                     </div><br>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="Interes" id="interes" name="interes">
+                        <span class="input-group-addon"><i class="fa fa-calculator"></i></span>
+                        <input type="text" class="form-control" placeholder="Interes" id="interes" name="interes" required>
                     </div><br>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="Años a pagar" id="years" name="years">
+                        <span class="input-group-addon"><i class="fa  fa-sort-numeric-desc "></i></span>
+                        <input type="text" class="form-control" placeholder="Años a pagar" id="years" name="years" required>
                     </div><br>
                 </div>
                 <div class="box-footer">

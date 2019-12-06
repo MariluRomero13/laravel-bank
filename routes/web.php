@@ -68,7 +68,7 @@ Route::resource('/prestamos', 'LoanController')->only(['index', 'create', 'store
 Route::get('/show-loans-view', 'LoanController@showLoansView');
 Route::get('/tabla-amortizacion/{payment_type}/{i}/{loan_amount}/{years_to_pay}', 'LoanController@tablaAmortizacion');
 Route::get('/detalles-pagos/{id}', 'LoanController@detallesPagos');
-Route::get('/print-pdf-loan/{id}', 'LoanController@exportPDF');
+Route::get('/print-pdf-loan/{payment_type}/{i}/{loan_amount}/{years_to_pay}', 'LoanController@exportPDF');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware

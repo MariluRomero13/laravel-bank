@@ -1,14 +1,13 @@
-@extends('adminlte::layouts.app')
-
-@section('title')
-	Tabla de amortización
-@endsection
-
-@section('links')
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-@endsection
-
-@section('main-content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Reporte de Pagos</title>
+</head>
+<body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -43,17 +42,10 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>    
-                    <div class="box-footer">
-                        <a type="button" class="btn btn-primary pull-right" href="{{ url('print-pdf-loan', [$payment_type, $i, $loan_amount, $years_to_pay]) }}">
-                            <i class="fa fa-print"></i> Imprimir            
-                        </a>
-                        <a type="button" class="btn btn-default pull-left" href="{{ url('show-loans-view') }}">
-                            <i class="fa fa-close"></i> Volver
-                        </a>
-                    </div>    
+                    </div>      
                 </div>
             </div> 
         </div>
     </div>
-@endsection
+</body>
+</html>

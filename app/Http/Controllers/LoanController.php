@@ -9,6 +9,7 @@ use App\Models\Loan;
 use App\Models\Payment;
 use Carbon\Carbon;
 use DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class LoanController extends Controller
 {
@@ -127,11 +128,18 @@ class LoanController extends Controller
         $collection = collect($collection[0])->map(function ($c) {
             return (object) $c;
         });
-        return view('prestamos.tabla', compact('collection'));
+        return view('prestamos.tabla', compact('collection', 'payment_type', 'i', 'loan_amount', 'years_to_pay'));
     }
 
-    public function exportPDF()
-    { }
+    public function exportPDF($payment_type, $i, $loan_amount, $years_to_pay)
+    { 
+        $collection = $this->calcular($payment_type, $i, $loan_amount, $years_to_pay);
+        $collection = collect($collection[0])->map(function ($c) {
+            return (object) $c;
+        });
+        $pdf = PDF::loadView('pdf.payments', compact('collection', 'payment_type', 'i', 'loan_amount', 'years_to_pay'));
+        return $pdf->download('reporte_pagos.pdf');
+    }
 
     public function calcular($payment_type, $i, $loan_amount, $years_to_pay)
     {
