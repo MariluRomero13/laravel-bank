@@ -58,7 +58,6 @@
                                     <th>Número Interno</th>
                                     <th>Código postal</th>
                                     <th>Acciones</th>
-                                    <!--th>Estado</th-->
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,7 +69,6 @@
                                         <td>{{$a->internal_number}}</td>
                                         <td>{{$a->postal_code}}</td>
                                         <td><a href="/clientes/editar/direcciones/{{$a->id}}" class="btn btn-warning"><i class='fa fa-edit'></i></a></td>
-                                        <!--td><a href="" class="btn btn-success"><i class='fa fa-check'></i></a></td-->
                                     </tr>
                                 @endforeach
                                 

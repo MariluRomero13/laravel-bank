@@ -73,7 +73,6 @@ class CustomerController extends Controller
         $user->role_id = 2;
         $user->save();
 
-        //$u = User::find($user->id);
         $customer = new Customer();
         $customer->user_id = $user->id;
         $customer->name = $request->get('name_customer');
@@ -84,7 +83,6 @@ class CustomerController extends Controller
         $customer->birthdate = $request->get('birthdate');
         $customer->phone = $request->get('phone');
         $customer->save();
-        //$u->customer()->save($customer);
         return redirect()->route('clientes.index');
     }
 

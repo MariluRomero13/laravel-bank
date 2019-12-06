@@ -65,7 +65,7 @@ Route::get('/print-pdf/{id}', 'CreditBureauController@exportPDF');
 
 Route::resource('/prestamos', 'LoanController')->only(['index', 'create', 'store']);
 Route::get('/show-loans-view', 'LoanController@showLoansView');
-Route::get('/show-loans-view', 'LoanController@showLoansView');
+Route::get('/tabla-amortizacion/{prestamo}/{t_pago}/{interes}/{years}', 'LoanController@calcular');
 Route::get('/print-pdf-loan/{id}', 'LoanController@exportPDF');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {

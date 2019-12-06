@@ -34,7 +34,7 @@
                     <li class="treeview">
                         <a href="#"><i class='fa fa-file'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class='fa fa-circle-o'></i><span>Calcular préstamos</span></a></li>
+                            <li><a href="{{ url('show-loans-view') }}"><i class='fa fa-circle-o'></i><span>Calcular préstamos</span></a></li>
                             <li><a href="{{ url('buscar-cliente') }}"><i class='fa fa-circle-o'></i><span>Buro de crédito</span></a></li>
                         </ul>
                     </li>
