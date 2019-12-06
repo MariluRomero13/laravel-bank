@@ -116,14 +116,16 @@ class LoanController extends Controller
             $pago->save();
         }
 
-        return view('pretsamos.index');
+        return view('prestamos.index');
     }
 
-    public function showLoansView(){
+    public function showLoansView()
+    {
         return view('prestamos.calcular');
     }
 
-    public function tablaAmortizacion($payment_type, $i, $loan_amount, $years_to_pay){
+    public function tablaAmortizacion($payment_type, $i, $loan_amount, $years_to_pay)
+    {
         $collection = $this->calcular($payment_type, $i, $loan_amount, $years_to_pay);
         $collection = collect($collection[0])->map(function ($c) {
             return (object) $c;
@@ -132,7 +134,7 @@ class LoanController extends Controller
     }
 
     public function exportPDF($payment_type, $i, $loan_amount, $years_to_pay)
-    { 
+    {
         $collection = $this->calcular($payment_type, $i, $loan_amount, $years_to_pay);
         $collection = collect($collection[0])->map(function ($c) {
             return (object) $c;

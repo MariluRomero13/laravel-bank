@@ -25,8 +25,8 @@ class UpdateCustomers extends FormRequest
     {
         return [
             'name_customer' => 'required|max:191|min:5',
-            'first_last_name' => 'required|max:191|min:5',
-            'second_last_name' => 'required|max:191|min:5',
+            'first_last_name' => 'required|max:191',
+            'second_last_name' => 'required|max:191',
             'curp' => 'required|max:18|min:18',
             'rfc' => 'required|max:13|min:13',
             'birthdate' => 'required',
@@ -34,7 +34,8 @@ class UpdateCustomers extends FormRequest
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'name_customer.required' => 'El nombre es obligatorio',
             'name_customer.max'  => 'Excediste el número de caracteres del nombre',

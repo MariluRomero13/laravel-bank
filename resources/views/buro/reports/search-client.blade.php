@@ -144,13 +144,13 @@
                             clearFields();
                         } else{
                             $("#error").empty();
-                            $("input[name=customer_id]").val(response.customer[0].id);
-                            $("input[name=name]").val(response.customer[0].name +' ' +response.customer[0].first_last_name +' ' +response.customer[0].second_last_name);
-                            $("input[name=rfc]").val(response.customer[0].rfc);
-                            $("input[name=curp]").val(response.customer[0].curp);
-                            $("input[name=birthdate]").val(response.customer[0].birthdate);
+                            $("input[name=customer_id]").val(response.customer.id);
+                            $("input[name=name]").val(response.customer.name);
+                            $("input[name=rfc]").val(response.customer.rfc);
+                            $("input[name=curp]").val(response.customer.curp);
+                            $("input[name=birthdate]").val(response.customer.birthdate);
                             $('#generar').attr({
-                                'href': '/generar-reporte/'+response.customer[0].id+'',
+                                'href': '/generar-reporte/'+response.customer.id+'',
                             });
                         }
                     },

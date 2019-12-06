@@ -184,11 +184,11 @@
                             $("#error").append('<span class="text-danger">El cliente no existe o está en buro de crédito</span>');
                             clearFields();
                         } else{
-                            $("input[name=customer_id]").val(response.customer[0].id);
-                            $("input[name=name]").val(response.customer[0].name);
-                            $("input[name=rfc]").val(response.customer[0].rfc);
-                            $("input[name=curp]").val(response.customer[0].curp);
-                            $("input[name=birthdate]").val(response.customer[0].birthdate);
+                            $("input[name=customer_id]").val(response.customer.id);
+                            $("input[name=name]").val(response.customer.name);
+                            $("input[name=rfc]").val(response.customer.rfc);
+                            $("input[name=curp]").val(response.customer.curp);
+                            $("input[name=birthdate]").val(response.customer.birthdate);
 
                         }
                     },

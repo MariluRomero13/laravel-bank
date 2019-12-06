@@ -39,21 +39,21 @@
                                             <td>{{$c->amortizacion}}</td>
                                             <td>{{$c->pendiente}}</td>
                                         </tr>
-                                    @endforeach 
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
-                    </div>    
+                    </div>
                     <div class="box-footer">
                         <a type="button" class="btn btn-primary pull-right" href="{{ url('print-pdf-loan', [$payment_type, $i, $loan_amount, $years_to_pay]) }}">
-                            <i class="fa fa-print"></i> Imprimir            
+                            <i class="fa fa-print"></i> Imprimir
                         </a>
                         <a type="button" class="btn btn-default pull-left" href="{{ url('show-loans-view') }}">
-                            <i class="fa fa-close"></i> Volver
+                            <i class="fa fa-arrow-left"></i> Volver
                         </a>
-                    </div>    
+                    </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 @endsection

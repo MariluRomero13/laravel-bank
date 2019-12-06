@@ -11,6 +11,7 @@ use DB;
 use App\Models\Message;
 use App\Models\Customer;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Collection as Collection;
 
 class CreditBureauController extends Controller
 {
@@ -97,13 +98,14 @@ class CreditBureauController extends Controller
     {
         if ($request->get('value') != null) {
             $customer = Customer::whereHas('creditBureau')->get();
-            $customers = collect([]);
-            foreach ($customer as $c) {
-                $customers->push([
-                    'id' => $c->id, 'name' => $c->name . ' ' . $c->first_last_name . ' ' . $c->second_last_name,
-                    'rfc' => $c->rfc, 'curp' => $c->curp, 'birthdate' => $c->birthdate
-                ]);
+            $customers = [];
+            for ($i = 0; $i < $customer->count(); $i++) {
+                $customers[$i] = [
+                    'id' => $customer[$i]->id, 'name' => $customer[$i]->name . ' ' . $customer[$i]->first_last_name . ' ' . $customer[$i]->second_last_name,
+                    'rfc' => $customer[$i]->rfc, 'curp' => $customer[$i]->curp, 'birthdate' => $customer[$i]->birthdate
+                ];
             }
+            $customers = Collection::make($customers);
             switch ($request->get('option')) {
                 case 1:
                     $c = $customers->where('name', $request->get('value'));
@@ -118,12 +120,23 @@ class CreditBureauController extends Controller
                     $c = $customers->where('birthdate', $request->get('value'));
                     break;
             }
+            $aux = $c->keys();
+            $new = Collection::make($c[$aux[0]]);
+            $creditos = DB::table('places as p')
+                ->join('credits as c', 'p.id', '=', 'c.place_id')
+                ->select('c.id', 'p.name')
+                ->where('c.customer_id', '=', $new->get('id'))
+                ->get();
         } else {
             return ['status' => 0];
         }
 
         if ($c->count() > 0) {
-            return ["customer" => $c, "status" => 1];
+            if ($creditos->count() > 0) {
+                return ["customer" => $new, "status" => 1, "creditos" => $creditos];
+            } else {
+                return ["customer" => $new, "status" => 1, "creditos" => 0];
+            }
         } else {
             return ["status" => 2];
         }

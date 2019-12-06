@@ -77,7 +77,7 @@
                                 <input type="text" class="form-control" id="customer_id" name="customer_id">
                             </div><br>
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                                 <select  class="form-control" name="card" required>
                                     <option value="0" selected>Selecciona la tarjeta...</option>
                                     <option value="1">Crédito</option>
@@ -85,7 +85,7 @@
                                 </select>
                             </div><br>
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                <span class="input-group-addon"><i class="fa  fa-cc-mastercard"></i></span>
                                 <select  class="form-control" name="card_type" required>
                                     <option value="0" selected>Selecciona el tipo de tarjeta...</option>
                                     <option value="1">MasterCard</option>
@@ -178,11 +178,11 @@
                             $("#error").append('<span class="text-danger">El cliente no existe o está en buro de crédito</span>');
                             clearFields();
                         } else{
-                            $("input[name=customer_id]").val(response.customer[0].id);
-                            $("input[name=name]").val(response.customer[0].name +' ' +response.customer[0].first_last_name +' ' +response.customer[0].second_last_name);
-                            $("input[name=rfc]").val(response.customer[0].rfc);
-                            $("input[name=curp]").val(response.customer[0].curp);
-                            $("input[name=birthdate]").val(response.customer[0].birthdate);
+                            $("input[name=customer_id]").val(response.customer.id);
+                            $("input[name=name]").val(response.customer.name);
+                            $("input[name=rfc]").val(response.customer.rfc);
+                            $("input[name=curp]").val(response.customer.curp);
+                            $("input[name=birthdate]").val(response.customer.birthdate);
 
                         }
                     },
@@ -201,5 +201,5 @@
             $("#birthdate").val("");
         }
     </script>
-    
+
 @endsection

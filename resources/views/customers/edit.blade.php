@@ -38,7 +38,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Registrar cliente</h3>
+                            <h3 class="box-title">Editar cliente</h3>
                         </div>
                         <div class="box-body">
                             @if (count($errors) > 0)
@@ -78,19 +78,19 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                 <input type="text" class="form-control" placeholder="phone" id="phone" name="phone" value="{{ $customer->phone}}">
-                            </div> 
-                        </div>  
+                            </div>
+                        </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-default pull-right button-modal-style">
                                 <i class="fa fa-save"></i> Guardar
                             </button>
                             <a type="button" class="btn btn-default pull-left" href="{{ route('clientes.index') }}">
-                                <i class="fa fa-close"></i> Volver
+                                <i class="fa fa-arrow-left"></i> Volver
                             </a>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
-    </div>    
+    </div>
 @endsection

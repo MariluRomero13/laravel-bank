@@ -37,9 +37,9 @@
                         <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                         <input type="text" class="form-control" value="{{ $customer->phone }}" disabled>
                     </div>
-                </div>    
+                </div>
                 <div class="box-footer">
-                </div>    
+                </div>
             </div>
         </div>
         <div class="col-md-8">
@@ -71,16 +71,16 @@
                                         <td><a href="/clientes/editar/direcciones/{{$a->id}}" class="btn btn-warning"><i class='fa fa-edit'></i></a></td>
                                     </tr>
                                 @endforeach
-                                
+
                             </tbody>
                         </table>
                     </div>
-                </div>    
+                </div>
                 <div class="box-footer">
                     <a type="button" class="btn btn-default pull-left" href="{{ route('clientes.index') }}">
-                        <i class="fa fa-close"></i> Volver
+                        <i class="fa fa-arrow-left"></i> Volver
                     </a>
-                </div>    
+                </div>
             </div>
-        </div>    
+        </div>
 @endsection

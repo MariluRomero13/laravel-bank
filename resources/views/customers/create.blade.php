@@ -78,19 +78,19 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                 <input type="text" class="form-control" placeholder="phone" id="phone" name="phone" value="{{ old('phone') }}" required>
-                            </div> 
-                        </div>  
+                            </div>
+                        </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-default pull-right button-modal-style">
                                 <i class="fa fa-save"></i> Guardar
                             </button>
                             <a type="button" class="btn btn-default pull-left" href="{{ route('clientes.index') }}">
-                                <i class="fa fa-close"></i> Volver
+                                <i class="fa fa-arrow-left"></i> Volver
                             </a>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
-    </div>    
+    </div>
 @endsection

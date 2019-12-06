@@ -21,14 +21,15 @@ class StoreCustomers extends FormRequest
      *
      * @return array
      */
-    public function rules(){
+    public function rules()
+    {
         return [
             'name' => 'required|max:191|min:5',
             'email' => 'required|unique:users|max:191|email',
             'password' => 'required|max:191|min:8',
             'name_customer' => 'required|max:191|min:5',
-            'first_last_name' => 'required|max:191|min:5',
-            'second_last_name' => 'required|max:191|min:5',
+            'first_last_name' => 'required|max:191',
+            'second_last_name' => 'required|max:191',
             'curp' => 'required|unique:customers|max:18|min:18',
             'rfc' => 'required|unique:customers|max:13|min:13',
             'birthdate' => 'required',
@@ -36,7 +37,8 @@ class StoreCustomers extends FormRequest
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'name.required' => 'El nombre de usuario es obligatorio',
             'name.max'  => 'Excediste el número de caracteres del nombre de usuario',
@@ -53,10 +55,8 @@ class StoreCustomers extends FormRequest
             'name_customer.min'  => 'El mínimo de caracteres del nombre es de 5',
             'first_last_name.required' => 'El apellido paterno es obligatorio',
             'first_last_name.max'  => 'Excediste el número de caracteres del apellido paterno',
-            'first_last_name.min'  => 'El mínimo de caracteres del apellido paterno es de 5',
             'second_last_name.required' => 'El apellido materno es obligatorio',
             'second_last_name.max'  => 'Excediste el número de caracteres del apellido materno',
-            'second_last_name.min'  => 'El mínimo de caracteres del apellido materno es de 5',
             'curp.required' => 'La CURP es obligatoria',
             'curp.unique' => 'La CURP ya existe',
             'curp.max' => 'Excediste el número de la CURP de caracteres',
