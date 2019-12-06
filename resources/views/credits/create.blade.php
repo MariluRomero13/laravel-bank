@@ -185,7 +185,7 @@
                             clearFields();
                         } else{
                             $("input[name=customer_id]").val(response.customer[0].id);
-                            $("input[name=name]").val(response.customer[0].name +' ' +response.customer[0].first_last_name +' ' +response.customer[0].second_last_name);
+                            $("input[name=name]").val(response.customer[0].name);
                             $("input[name=rfc]").val(response.customer[0].rfc);
                             $("input[name=curp]").val(response.customer[0].curp);
                             $("input[name=birthdate]").val(response.customer[0].birthdate);

@@ -153,12 +153,17 @@ class CustomerController extends Controller
                     $c = $customers->where('birthdate', $request->get('value'));
                     break;
             }
+            $creditos = DB::table('places as p')
+                ->join('credits as c', 'p.id', '=', 'c.place_id')
+                ->select('c.id', 'p.name')
+                ->where('c.customer_id', '=', $c[0])
+                ->get();
         } else {
             return ['status' => 0];
         }
 
         if ($c->count() > 0) {
-            return ["customer" => $c, "status" => 1];
+            return ["customer" => $c, "status" => 1, "creditos" => $creditos];
         } else {
             return ["status" => 2];
         }
