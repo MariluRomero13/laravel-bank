@@ -62,6 +62,10 @@ Route::get('/buscar-cliente', 'CreditBureauController@searchClientView');
 Route::post('/search-buro-customers', 'CreditBureauController@searchBuroCustomer');
 Route::get('/generar-reporte/{id}', 'CreditBureauController@generateReport');
 Route::get('/print-pdf/{id}', 'CreditBureauController@exportPDF');
+
+
+Route::resource('/prestamos', 'LoanController');
+
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware
