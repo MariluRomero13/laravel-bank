@@ -66,12 +66,13 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
+
     protected function attemptLogin(Request $request)
     {
         if ($this->username() === 'email') {
             return $this->attemptLoginAtAuthenticatesUsers($request);
         }
-        if (! $this->attemptLoginAtAuthenticatesUsers($request)) {
+        if (!$this->attemptLoginAtAuthenticatesUsers($request)) {
             return $this->attempLoginUsingUsernameAsAnEmail($request);
         }
         return false;

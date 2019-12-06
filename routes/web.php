@@ -10,12 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('pruebas', 'CustomerController@pruebas');
-Route::get('/cliente-dashboard', 'CustomerController@dashboardView');
+
+
 Route::get('/cliente-tarjetas', 'CustomerController@tarjetasView');
 Route::get('/cliente-creditos', 'CustomerController@creditosView');
 Route::get('/cliente-prestamos', 'CustomerController@prestamosView');
 Route::get('/cliente-buró', 'CustomerController@buroView');
+Route::get('/cliente-pagos/{id}', 'CustomerController@pagosView');
 
 Route::get('/', 'ViewController@welcome');
 Route::resource('/usuarios', 'UserController')->except(['edit', 'destroy']);
@@ -42,6 +43,9 @@ Route::get('/clientes/editar/direcciones/{id}', 'AddressController@edit');
 Route::resource('/instituciones', 'PlaceController')->except(['show', 'destroy']);
 Route::get('institucion-editar/{id}', 'PlaceController@edit');
 
+Route::resource('/tarjetas', 'CardController')->except(['destroy']);
+Route::get('delete-cards/{card_number}', 'CardController@destroy');
+
 Route::resource('/creditos', 'CreditController')->except(['edit', 'destroy']);
 Route::get('creditos-editar/{id}', 'CreditController@edit');
 Route::get('creditos-destroy/{id}', 'CreditController@destroy');
@@ -54,6 +58,16 @@ Route::get('/buro-credito-mensajes/{id}', 'CreditBureauController@messageView');
 Route::get('/buro-credito-reportes/{id}', 'CreditBureauController@reportView');
 Route::get('/buro-destroy/{id}', 'CreditBureauController@destroy');
 Route::post('/registrar-mensaje', 'CreditBureauController@addMessages');
+
+Route::get('/buscar-cliente', 'CreditBureauController@searchClientView');
+Route::post('/search-buro-customers', 'CreditBureauController@searchBuroCustomer');
+Route::get('/generar-reporte/{id}', 'CreditBureauController@generateReport');
+Route::get('/print-pdf/{id}', 'CreditBureauController@exportPDF');
+
+Route::resource('/prestamos', 'LoanController')->only(['index', 'create', 'store']);
+Route::get('/show-loans-view', 'LoanController@showLoansView');
+Route::get('/show-loans-view', 'LoanController@showLoansView');
+Route::get('/print-pdf-loan/{id}', 'LoanController@exportPDF');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware

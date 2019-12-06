@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Credit;
 use Illuminate\Http\Request;
 use App\Models\CreditBureau;
 use Datatables;
 use DB;
 use App\Models\Message;
+use App\Models\Customer;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CreditBureauController extends Controller
 {
@@ -83,5 +86,98 @@ class CreditBureauController extends Controller
         $message->credit_bureaus_id = $buro->id;
         $message->save();
         return redirect()->route('buro-credito.index');
+    }
+
+    public function searchClientView(Request $request)
+    {
+        return view('buro.reports.search-client');
+    }
+
+    public function searchBuroCustomer(Request $request)
+    {
+        if ($request->get('value') != null) {
+            $customer = Customer::whereHas('creditBureau')->get();
+            $customers = collect([]);
+            foreach ($customer as $c) {
+                $customers->push([
+                    'id' => $c->id, 'name' => $c->name . ' ' . $c->first_last_name . ' ' . $c->second_last_name,
+                    'rfc' => $c->rfc, 'curp' => $c->curp, 'birthdate' => $c->birthdate
+                ]);
+            }
+            switch ($request->get('option')) {
+                case 1:
+                    $c = $customers->where('name', $request->get('value'));
+                    break;
+                case 2:
+                    $c = $customers->where('rfc', $request->get('value'));
+                    break;
+                case 3:
+                    $c = $customers->where('curp', $request->get('value'));
+                    break;
+                case 4:
+                    $c = $customers->where('birthdate', $request->get('value'));
+                    break;
+            }
+        } else {
+            return ['status' => 0];
+        }
+
+        if ($c->count() > 0) {
+            return ["customer" => $c, "status" => 1];
+        } else {
+            return ["status" => 2];
+        }
+    }
+
+    public function generateReport($id)
+    {
+        $customer = Customer::find($id);
+        $addresses = Address::where('customer_id', '=', $customer->id)->get();
+        $credits = DB::table('credit_bureaus as cb')
+            ->join('customers as cu', 'cu.id', '=', 'cb.customer_id')
+            ->join('credits as cr', 'cr.id', '=', 'cb.credit_id')
+            ->join('places as p', 'p.id', '=', 'cr.place_id')
+            ->select(
+                'p.id as code',
+                'p.name as place',
+                'cr.credit_type',
+                'cr.description',
+                'cb.register_date'
+            )->where('cu.id', '=', $customer->id)->get();
+
+        $messages = DB::table('credit_bureaus as cb')
+            ->join('customers as cu', 'cu.id', '=', 'cb.customer_id')
+            ->join('credits as cr', 'cr.id', '=', 'cb.credit_id')
+            ->join('messages as m', 'm.credit_bureaus_id', '=', 'cb.id')
+            ->select('m.message')
+            ->where('cu.id', '=', $customer->id)->get();
+        return view('buro.reports.generate-report', compact('customer', 'addresses', 'credits', 'messages'));
+    }
+
+    public function exportPDF($id)
+    {
+        $customer = Customer::find($id);
+        $addresses = Address::where('customer_id', '=', $customer->id)->get();
+        $credits = DB::table('credit_bureaus as cb')
+            ->join('customers as cu', 'cu.id', '=', 'cb.customer_id')
+            ->join('credits as cr', 'cr.id', '=', 'cb.credit_id')
+            ->join('places as p', 'p.id', '=', 'cr.place_id')
+            ->select(
+                'p.id as code',
+                'p.name as place',
+                'cr.credit_type',
+                'cr.description',
+                'cb.register_date'
+            )->where('cu.id', '=', $customer->id)->get();
+
+        $messages = DB::table('credit_bureaus as cb')
+            ->join('customers as cu', 'cu.id', '=', 'cb.customer_id')
+            ->join('credits as cr', 'cr.id', '=', 'cb.credit_id')
+            ->join('messages as m', 'm.credit_bureaus_id', '=', 'cb.id')
+            ->select('m.message')
+            ->where('cu.id', '=', $customer->id)->get();
+
+        $pdf = PDF::loadView('pdf.print', compact('customer', 'addresses', 'credits', 'messages'));
+        return $pdf->download('reporte.pdf');
     }
 }

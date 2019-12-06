@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Loan;
+use Carbon\Carbon;
 
 class LoanController extends Controller
 {
@@ -14,7 +15,47 @@ class LoanController extends Controller
      */
     public function index()
     {
-        //
+        $collection = Collect([]);
+        $tipo_pagar = 1;
+        $interes = 5;
+        $prestamo = 100000;
+        $year = 25;
+        $tipo = (0.01 * $interes) / 12;
+        if ($tipo_pagar) {
+            $num_pagos = 12 * $year;
+        } else {
+            $num_pagos = 24 * $year;
+        }
+        $cuota = $this->pmt($interes, $num_pagos, $prestamo);
+        $INTERESES = 0;
+        $TINTERESES = 0;
+        $AMORTIZACION = 0;
+        $TAMORTIZACION = 0;
+        $TCUOTAS = 0;
+        $PENDIENTE = $prestamo;
+
+        for ($n = 0; $n <= $num_pagos; $n++) {
+            $INTERESES = round($PENDIENTE * $tipo, 2);
+            $TINTERESES += $INTERESES;
+            $AMORTIZACION = round($cuota - $INTERESES, 2);
+            $TAMORTIZACION += $AMORTIZACION;
+            $PENDIENTE -= $AMORTIZACION;
+            $TCUOTAS += $cuota;
+
+            $collection->push([
+                'num_pago' => $n, 'Fecha_pago' => Carbon::now()->addMonths($n), 'cuota' => $cuota, 'amortización' => $AMORTIZACION, 'intereses' => $INTERESES, 'pendiente' => $PENDIENTE
+            ]);
+        }
+
+        return $collection;
+    }
+
+    function pmt($interest, $months, $loan)
+    {
+        $months = $months;
+        $interest = $interest / 1200;
+        $amount = $interest * -$loan * pow((1 + $interest), $months) / (1 - pow((1 + $interest), $months));
+        return number_format($amount, 2);
     }
 
     /**
@@ -38,48 +79,9 @@ class LoanController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    public function showLoansView()
+    { }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    public function exportPDF()
+    { }
 }

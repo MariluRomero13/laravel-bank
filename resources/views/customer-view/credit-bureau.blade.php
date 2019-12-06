@@ -26,22 +26,13 @@
                         <thead>
                             <tr>
                                 <th>Institución</th>
-                                <th>Años a pagar</th>
-                                <th>Tasa de interes</th>
-                                <th>Monto del prestamo</th>
-                                <th>Total a pagar</th>
-                                <th>Fecha del prestamo</th>
-                                <th>Mensaje</th>
+                                <th>Descripción del crédito</th>
+                                <th>Fecha de registro</th>
                             </tr>
                             @foreach($buro as $b)
                                 <tr>
                                     <td>{{$b->name}}</td>
-                                    <td>{{$b->years_to_pay}}</td>
-                                    <td>{{$b->interest_rate}}</td>
-                                    <td>{{$b->loan_amount}}</td>
-                                    <td>{{$b->total_amount_to_pay}}</td>
-                                    <td>{{$b->loan_date}}</td>
-                                    <td>{{$b->message}}</td>
+                                    <td>{{$b->register_date}}</td>
                                 </tr>
                             @endforeach
                         </thead>
