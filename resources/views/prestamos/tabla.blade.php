@@ -11,10 +11,10 @@
 @section('main-content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8 col-md-offset-4">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Direcciones</h3>
+                        <h3 class="box-title">Tabla de Amortización</h3>
                     </div>
                     <div class="box-body">
                         <div class="table-responsive" style="margin-top: 2%;">
@@ -33,10 +33,10 @@
                                     @foreach ($collection as $c)
                                         <tr>
                                             <td>{{$c->num_pago}}</td>
-                                            <td>{{$c->fecha_pago}}</td>
+                                            <td>{{$c->fecha}}</td>
                                             <td>{{$c->cuota}}</td>
-                                            <td>{{$c->intereses}}</td>
-                                            <td>{{$c->amortización}}</td>
+                                            <td>{{$c->interes}}</td>
+                                            <td>{{$c->amortizacion}}</td>
                                             <td>{{$c->pendiente}}</td>
                                         </tr>
                                     @endforeach 
@@ -45,7 +45,7 @@
                         </div>
                     </div>    
                     <div class="box-footer">
-                        <a type="button" class="btn btn-default pull-left" href="{{ route('show-loans-view') }}">
+                        <a type="button" class="btn btn-default pull-left" href="{{ url('show-loans-view') }}">
                             <i class="fa fa-close"></i> Volver
                         </a>
                     </div>    

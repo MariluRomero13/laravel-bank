@@ -25,7 +25,10 @@
                 <thead>
                     <tr>
                         <th>Cliente</th>
+                        <th>Institución</th>
                         <th>Préstamo</th>
+                        <th>Totál a pagar</th>
+                        <th>Fecha de pago</th>
                         <th>Detalles</th>
                     </tr>
                 </thead>
@@ -33,14 +36,17 @@
                     @foreach ($cu as $a)
                         <tr>
                             <td>{{$a->customer}}</td>
+                            <td>{{$a->place_name}}</td>
                             <td>${{$a->loan_amount}}</td>
+                            <td>${{$a->total_amount_to_pay}}</td>
+                            <td>{{$a->loan_date}}</td>
                             <td><a href="pagos/{{$a->loan_id}}" class="btn btn-warning"><i class='fa fa-edit'></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{$cu->links()}}
-        </div>
+                {{$cu->links()}}
+            </div>
         </div>
 </section>
 @endsection

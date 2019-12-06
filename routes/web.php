@@ -26,6 +26,7 @@ Route::get('users-destroy/{id}', 'UserController@destroy');
 Route::resource('/pagos', 'PaymentController');
 Route::get('/pagos', 'PaymentController@index');
 Route::get('/pagos-detalles/{id}', 'PaymentController@show');
+Route::get('/pay/{id}/{loan_id}', 'PaymentController@pay');
 
 
 
@@ -65,7 +66,8 @@ Route::get('/print-pdf/{id}', 'CreditBureauController@exportPDF');
 
 Route::resource('/prestamos', 'LoanController')->only(['index', 'create', 'store']);
 Route::get('/show-loans-view', 'LoanController@showLoansView');
-Route::get('/tabla-amortizacion/{prestamo}/{t_pago}/{interes}/{years}', 'LoanController@calcular');
+Route::get('/tabla-amortizacion/{payment_type}/{i}/{loan_amount}/{years_to_pay}', 'LoanController@tablaAmortizacion');
+Route::get('/detalles-pagos/{id}', 'LoanController@detallesPagos');
 Route::get('/print-pdf-loan/{id}', 'LoanController@exportPDF');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {

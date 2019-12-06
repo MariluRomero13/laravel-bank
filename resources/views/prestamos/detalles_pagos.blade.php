@@ -31,11 +31,10 @@
                         <th>Capital Amortizado</th>
                         <th>Capital Final</th>
                         <th>Pagado</th>
-                        <th>Pagar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($Payment as $a)
+                    @foreach ($pagos as $a)
                         <tr>
                             <td>{{$a->payment_number}}</td>
                             <td>{{$a->payment_date}}</td>
@@ -45,17 +44,15 @@
                             <td>${{$a->final_capital}}</td>
                             @if($a->status==1)
                                 <td><a class="btn btn-success"><i class='fa fa-check'></i></a></td>
-                                <td><a class="btn btn-warning" disable><i class='fa fa-money'></i></a></td>
                             @else
                                 <td><a class="btn btn-danger"><i class='fa fa-close'></i></a></td>
-                                <td><a href="/pay/{{$a->id}}./{{$a->loan_id}}" class="btn btn-warning"><i class='fa fa-money'></i></a></td>
                             @endif
                         </tr>
                     @endforeach
                 </tbody>
             </table>
             <div class="box-footer">
-                <a type="button" class="btn btn-default pull-left" href="/pagos">
+                <a type="button" class="btn btn-default pull-left" href="/prestamos">
                     <i class="fa fa-close"></i> Volver
                 </a>
             </div>

@@ -55,7 +55,7 @@
                 var interes = $("input[name=interes]").val();
                 var years = $("input[name=years]").val();
                 $('#calcular').attr({
-                    'href': '/tabla-amortizacion/'+prestamo+'/'+tipo_pago+'/'+interes+'/'+years+'',
+                    'href': '/tabla-amortizacion/'+tipo_pago+'/'+interes+'/'+prestamo+'/'+years+'',
                 });
             })
         })

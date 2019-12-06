@@ -18,8 +18,6 @@ class DatabaseSeeder extends Seeder
             AddressTableSeeder::class,
             PlacesTableSeeder::class,
             CreditsTableSeeder::class,
-            LoansTableSeeder::class,
-            PaymentsTableSeeder::class,
             CreditsBureauTableSeeder::class,
             MessagesTableSeeder::class,
             CardsTableSeeder::class
