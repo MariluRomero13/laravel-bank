@@ -63,9 +63,10 @@ Route::post('/search-buro-customers', 'CreditBureauController@searchBuroCustomer
 Route::get('/generar-reporte/{id}', 'CreditBureauController@generateReport');
 Route::get('/print-pdf/{id}', 'CreditBureauController@exportPDF');
 
-
-Route::resource('/prestamos', 'LoanController');
-
+Route::resource('/prestamos', 'LoanController')->only(['index', 'create', 'store']);
+Route::get('/show-loans-view', 'LoanController@showLoansView');
+Route::get('/show-loans-view', 'LoanController@showLoansView');
+Route::get('/print-pdf-loan/{id}', 'LoanController@exportPDF');
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
     //        // Uses Auth Middleware
